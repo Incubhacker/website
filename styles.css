@@ -18,14 +18,14 @@ body {
 }
 
 .BackgroundIncub {
-  position: fixed;    /* pour que ce soit un fond qui reste en place */
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;       /* toute la largeur */
-  height: 100vh;      /* toute la hauteur */
-  background: red;    /* ton fond */
-  background-image: url(https://github.com/Incubhacker/website/blob/main/oeuf_BG.png);
-  z-index: -1;        /* derrière tout le reste */
+  width: 100vw;
+  height: 100vh;
+  background: green;
+  background-size: cover;
+  z-index: -1;
 }
 
 .cards {
