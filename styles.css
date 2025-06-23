@@ -26,7 +26,7 @@ body {
   background-color: green;
   background-image: url("/assets/logo oeuf bgV2.svg");
   background-repeat:no-repeat;
-  background-position:50% 50%;
+  background: position 10O% 50%;
   background-size:auto;
   background-attachment:fixed;
   z-index: -1;
