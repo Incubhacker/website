@@ -23,10 +23,10 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: black;
-  background-image: url("/assets/oeuf_BG.png");
+  background-color: green;
+  background-image: url("/assets/logo oeuf bgV2.svg");
   background-repeat:no-repeat;
-  background-position:100% 50%;
+  background-position:50% 50%;
   background-size:auto;
   background-attachment:fixed;
   z-index: -1;
