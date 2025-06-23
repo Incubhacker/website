@@ -2,7 +2,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 let iteration = 0; // gets iterated when we scroll all the way to the end or start and wraps around - allows us to smoothly continue the playhead scrubbing in the correct direction.
 
-const spacing = 0.06,    // spacing of the cards (stagger)
+const spacing = 0.05,    // spacing of the cards (stagger)
 	snap = gsap.utils.snap(spacing), // we'll use this to snap the playhead on the seamlessLoop
 	cards = gsap.utils.toArray('.cards li'),
 	seamlessLoop = buildSeamlessLoop(cards, spacing),
@@ -107,7 +107,84 @@ function buildSeamlessLoop(items, spacing) {
 	return seamlessLoop;
 }
 
+let autoScroll;
+let resumeTimeout;
+let isHovered = false;
 
+// Scroll automatique vers la droite
+function scrollNext() {
+  scrubTo(scrub.vars.totalTime + spacing);
+  scheduleAutoScroll(); // relance le timer à chaque scroll auto
+}
 
+// (Re)lance le scroll auto après un certain délai
+function scheduleAutoScroll(delay = 3000) {
+  clearTimeout(resumeTimeout);
+  if (autoScroll) autoScroll.kill();
 
+  // Ne lance pas si survol actif
+  if (isHovered) return;
 
+  resumeTimeout = setTimeout(() => {
+    autoScroll = gsap.delayedCall(0.1, scrollNext);
+  }, delay);
+}
+
+// Stoppe tout scroll auto immédiatement
+function pauseAutoScroll() {
+  if (autoScroll) autoScroll.kill();
+  clearTimeout(resumeTimeout);
+}
+
+// Interactions manuelles => pause + redémarrage après 12s
+function manualInteraction() {
+  pauseAutoScroll();
+  scheduleAutoScroll(12000);
+}
+
+// --- Boutons
+
+document.querySelector(".next").addEventListener("click", () => {
+  scrubTo(scrub.vars.totalTime + spacing);
+  manualInteraction();
+});
+
+document.querySelector(".prev").addEventListener("click", () => {
+  scrubTo(scrub.vars.totalTime - spacing);
+  manualInteraction();
+});
+
+// --- Molette
+
+window.addEventListener("wheel", manualInteraction);
+
+// --- Flèches clavier
+
+window.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowRight") {
+    e.preventDefault();
+    scrubTo(scrub.vars.totalTime + spacing);
+    manualInteraction();
+  } else if (e.key === "ArrowLeft") {
+    e.preventDefault();
+    scrubTo(scrub.vars.totalTime - spacing);
+    manualInteraction();
+  }
+});
+
+// --- Survol
+
+const cardsContainer = document.querySelector(".cards");
+
+cardsContainer.addEventListener("mouseenter", () => {
+  isHovered = true;
+  pauseAutoScroll(); // arrêt immédiat
+});
+
+cardsContainer.addEventListener("mouseleave", () => {
+  isHovered = false;
+  scheduleAutoScroll(3000); // reprise après 3s
+});
+
+// --- Lancement initial du scroll auto
+scheduleAutoScroll(3000);
