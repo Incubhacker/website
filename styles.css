@@ -40,7 +40,25 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -55%);
+  
 }
+
+.cards li::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: black;
+  background-image: url("/assets/logo%20oeuf%20bgV2.svg");
+  background-repeat: no-repeat;
+  background-position: 100% 50%;
+  background-size: contain;
+  background-attachment: fixed;
+  opacity: 0.2;
+  pointer-events: none;
+  border-radius: 1.2rem; /* match avec .cards li */
+}
+
 @media (max-aspect-ratio: 1/1) {
   .cards {
     aspect-ratio: 9 / 16;
@@ -56,20 +74,48 @@ body {
   width: 100%;
   height: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 5vw; /* responsive */
-  background-color: #9d7cce;
-  position: absolute;
-  top: 0;
-  left: 0;
+  flex-direction: row;
   border-radius: 1.2rem;
+  background-color: black;
   color: white;
   font-weight: bold;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 5vw;
+  overflow: hidden;
+  
+  border: 3px solid white;
+  box-sizing: border-box;
 }
 
+/* media query pour changer en colonne en portrait */
+@media (max-aspect-ratio: 1/1) {
+  .cards li {
+    flex-direction: column;
+  }
+}
 
+.cards li > .left-side,
+.cards li > .right-side {
+  flex: 1; /* chaque côté prend 50% */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem; /* optionnel, pour un peu de marge intérieure */
+}
+
+/* différencier les deux côtés */
+
+.cards li > .left-side {
+  background-color: ; /* légèrement différent pour voir la séparation */
+}
+
+.cards li > .right-side {
+  background-color: ;
+
+}
 
 
 .actions {

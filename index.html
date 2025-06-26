@@ -1,62 +1,153 @@
 <!DOCTYPE html>
 <html lang="fr">
-	<head>
-		<title>Galerie GSAP - Défilement Infini</title>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="styles.css" />
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-	</head>
-	<body>
-		<div class="BackgroundIncub"></div>
-		<div class="gallery">
-			<!-- Élément principal qui sera "pinné" (fixé) pendant le scroll par ScrollTrigger -->
-			<ul class="cards">
-				<!-- Conteneur des cartes à faire défiler et animer avec GSAP -->
-				<!-- Chaque 
-				<li>
-					 représente une carte animée dans la boucle -->
-					<li>0</li>
-					<li>1</li>
-					<li>2</li>
-					<li>3</li>
-					<li>4</li>
-					<li>5</li>
-					<li>6</li>
-					<li>7</li>
-					<li>8</li>
-					<li>9</li>
-					<li>10</li>
-					<li>11</li>
-					<li>12</li>
-					<li>13</li>
-					<li>14</li>
-					<li>15</li>
-					<li>16</li>
-					<li>17</li>
-					<li>18</li>
-					<li>19</li>
-					<li>20</li>
-					<li>21</li>
-					<li>22</li>
-					<li>23</li>
-					<li>24</li>
-					<li>25</li>
-					<li>26</li>
-					<li>27</li>
-					<li>28</li>
-					<li>29</li>
-					<li>30</li>
-					<!-- Un total de 31 cartes pour créer un effet de défilement long -->
-				</ul>
-				<div class="actions">
-					<!-- Boutons de navigation manuelle liés aux événements JS .next et .prev -->
-					<button class="prev">Prev</button>
-					<button class="next">Next</button>
-				</div>
-			</div>
-			<script type="module" src="script.js"></script>
-		</div>
-	</body>
+<head>
+  <title>Galerie GSAP - Défilement Infini</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body>
+  <div class="BackgroundIncub"></div>
+  <div class="gallery">
+    <!-- Élément principal qui sera "pinné" (fixé) pendant le scroll par ScrollTrigger -->
+    <ul class="cards">
+      <!-- Conteneur des cartes à faire défiler et animer avec GSAP -->
+      <!-- Chaque <li> représente une carte animée dans la boucle -->
+      <li>
+        <div class="left-side">0</div>
+        <div class="right-side"></div>
+      </li>
+      <li>
+        <div class="left-side">1</div>
+        <div class="right-side"></div>
+      </li>
+      <li>
+        <div class="left-side">2</div>
+        <div class="right-side"></div>
+      </li>
+      <li>
+        <div class="left-side">3</div>
+        <div class="right-side"></div>
+      </li>
+      <li>
+        <div class="left-side">4</div>
+        <div class="right-side"></div>
+      </li>
+      <li>
+        <div class="left-side">5</div>
+        <div class="right-side"></div>
+      </li>
+      <li>
+        <div class="left-side">6</div>
+        <div class="right-side"></div>
+      </li>
+      <li>
+        <div class="left-side">7</div>
+        <div class="right-side"></div>
+      </li>
+      <li>
+        <div class="left-side">8</div>
+        <div class="right-side"></div>
+      </li>
+      <li>
+        <div class="left-side">9</div>
+        <div class="right-side"></div>
+      </li>
+      <li>
+        <div class="left-side">10</div>
+        <div class="right-side"></div>
+      </li>
+      <li>
+        <div class="left-side">11</div>
+        <div class="right-side"></div>
+      </li>
+      <li>
+        <div class="left-side">12</div>
+        <div class="right-side"></div>
+      </li>
+      <li>
+        <div class="left-side">13</div>
+        <div class="right-side"></div>
+      </li>
+      <li>
+        <div class="left-side">14</div>
+        <div class="right-side"></div>
+      </li>
+      <li>
+        <div class="left-side">15</div>
+        <div class="right-side"></div>
+      </li>
+      <li>
+        <div class="left-side">16</div>
+        <div class="right-side"></div>
+      </li>
+      <li>
+        <div class="left-side">17</div>
+        <div class="right-side"></div>
+      </li>
+      <li>
+        <div class="left-side">18</div>
+        <div class="right-side"></div>
+      </li>
+      <li>
+        <div class="left-side">19</div>
+        <div class="right-side"></div>
+      </li>
+      <li>
+        <div class="left-side">20</div>
+        <div class="right-side"></div>
+      </li>
+      <li>
+        <div class="left-side">21</div>
+        <div class="right-side"></div>
+      </li>
+      <li>
+        <div class="left-side">22</div>
+        <div class="right-side"></div>
+      </li>
+      <li>
+        <div class="left-side">23</div>
+        <div class="right-side"></div>
+      </li>
+      <li>
+        <div class="left-side">24</div>
+        <div class="right-side"></div>
+      </li>
+      <li>
+        <div class="left-side">25</div>
+        <div class="right-side"></div>
+      </li>
+      <li>
+        <div class="left-side">26</div>
+        <div class="right-side"></div>
+      </li>
+      <li>
+        <div class="left-side">27</div>
+        <div class="right-side"></div>
+      </li>
+      <li>
+        <div class="left-side">28</div>
+        <div class="right-side"></div>
+      </li>
+      <li>
+        <div class="left-side">29</div>
+        <div class="right-side"></div>
+      </li>
+      <li>
+        <div class="left-side">30</div>
+        <div class="right-side"></div>
+      </li>
+      <!-- Un total de 31 cartes pour créer un effet de défilement long -->
+    </ul>
+
+    <div class="actions">
+      <!-- Boutons de navigation manuelle liés aux événements JS .next et .prev -->
+      <button class="prev">Prev</button>
+      <button class="next">Next</button>
+    </div>
+  </div>
+  <script type="module" src="script.js"></script>
+</body>
 </html>
