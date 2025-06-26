@@ -11,139 +11,38 @@
 <body>
   <div class="BackgroundIncub"></div>
   <div class="gallery">
-    <!-- Élément principal qui sera "pinné" (fixé) pendant le scroll par ScrollTrigger -->
     <ul class="cards">
-      <!-- Conteneur des cartes à faire défiler et animer avec GSAP -->
-      <!-- Chaque <li> représente une carte animée dans la boucle -->
-      <li>
-        <div class="left-side">0</div>
-        <div class="right-side"></div>
+      <!-- 31 cartes avec entête externe -->
+      <!-- Ex. carte 0 -->
+      <li class="card-wrapper">
+        <div class="card-header">Carte 0</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
       </li>
-      <li>
-        <div class="left-side">1</div>
-        <div class="right-side"></div>
-      </li>
-      <li>
-        <div class="left-side">2</div>
-        <div class="right-side"></div>
-      </li>
-      <li>
-        <div class="left-side">3</div>
-        <div class="right-side"></div>
-      </li>
-      <li>
-        <div class="left-side">4</div>
-        <div class="right-side"></div>
-      </li>
-      <li>
-        <div class="left-side">5</div>
-        <div class="right-side"></div>
-      </li>
-      <li>
-        <div class="left-side">6</div>
-        <div class="right-side"></div>
-      </li>
-      <li>
-        <div class="left-side">7</div>
-        <div class="right-side"></div>
-      </li>
-      <li>
-        <div class="left-side">8</div>
-        <div class="right-side"></div>
-      </li>
-      <li>
-        <div class="left-side">9</div>
-        <div class="right-side"></div>
-      </li>
-      <li>
-        <div class="left-side">10</div>
-        <div class="right-side"></div>
-      </li>
-      <li>
-        <div class="left-side">11</div>
-        <div class="right-side"></div>
-      </li>
-      <li>
-        <div class="left-side">12</div>
-        <div class="right-side"></div>
-      </li>
-      <li>
-        <div class="left-side">13</div>
-        <div class="right-side"></div>
-      </li>
-      <li>
-        <div class="left-side">14</div>
-        <div class="right-side"></div>
-      </li>
-      <li>
-        <div class="left-side">15</div>
-        <div class="right-side"></div>
-      </li>
-      <li>
-        <div class="left-side">16</div>
-        <div class="right-side"></div>
-      </li>
-      <li>
-        <div class="left-side">17</div>
-        <div class="right-side"></div>
-      </li>
-      <li>
-        <div class="left-side">18</div>
-        <div class="right-side"></div>
-      </li>
-      <li>
-        <div class="left-side">19</div>
-        <div class="right-side"></div>
-      </li>
-      <li>
-        <div class="left-side">20</div>
-        <div class="right-side"></div>
-      </li>
-      <li>
-        <div class="left-side">21</div>
-        <div class="right-side"></div>
-      </li>
-      <li>
-        <div class="left-side">22</div>
-        <div class="right-side"></div>
-      </li>
-      <li>
-        <div class="left-side">23</div>
-        <div class="right-side"></div>
-      </li>
-      <li>
-        <div class="left-side">24</div>
-        <div class="right-side"></div>
-      </li>
-      <li>
-        <div class="left-side">25</div>
-        <div class="right-side"></div>
-      </li>
-      <li>
-        <div class="left-side">26</div>
-        <div class="right-side"></div>
-      </li>
-      <li>
-        <div class="left-side">27</div>
-        <div class="right-side"></div>
-      </li>
-      <li>
-        <div class="left-side">28</div>
-        <div class="right-side"></div>
-      </li>
-      <li>
-        <div class="left-side">29</div>
-        <div class="right-side"></div>
-      </li>
-      <li>
-        <div class="left-side">30</div>
-        <div class="right-side"></div>
-      </li>
-      <!-- Un total de 31 cartes pour créer un effet de défilement long -->
+      <!-- Répéter les suivantes -->
+      <!-- ... -->
+      <!-- Généré dynamiquement pour clarté -->
+      <!-- JS pour générer automatiquement les autres -->
+      <script>
+        const list = document.querySelector('.cards');
+        for (let i = 1; i <= 30; i++) {
+          const li = document.createElement('li');
+          li.className = "card-wrapper";
+          li.innerHTML = `
+            <div class="card-header">Carte ${i}</div>
+            <div class="card">
+              <div class="left-side">${i}</div>
+              <div class="right-side"></div>
+            </div>
+          `;
+          list.appendChild(li);
+        }
+      </script>
     </ul>
 
     <div class="actions">
-      <!-- Boutons de navigation manuelle liés aux événements JS .next et .prev -->
       <button class="prev">Prev</button>
       <button class="next">Next</button>
     </div>
