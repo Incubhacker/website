@@ -7,42 +7,237 @@
   <link rel="stylesheet" href="styles.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  
 </head>
 <body>
   <div class="BackgroundIncub"></div>
   <div class="gallery">
+    <!-- Élément principal qui sera "pinné" (fixé) pendant le scroll par ScrollTrigger -->
     <ul class="cards">
-      <!-- 31 cartes avec entête externe -->
-      <!-- Ex. carte 0 -->
+      <!-- Conteneur des cartes à faire défiler et animer avec GSAP -->
+      <!-- Chaque <li> représente une carte animée dans la boucle -->
       <li class="card-wrapper">
-        <div class="card-header">Carte 0</div>
+        <div class="card-header">incubhacker</div>
         <div class="card">
           <div class="left-side">0</div>
           <div class="right-side"></div>
         </div>
       </li>
-      <!-- Répéter les suivantes -->
-      <!-- ... -->
-      <!-- Généré dynamiquement pour clarté -->
-      <!-- JS pour générer automatiquement les autres -->
-      <script>
-        const list = document.querySelector('.cards');
-        for (let i = 1; i <= 30; i++) {
-          const li = document.createElement('li');
-          li.className = "card-wrapper";
-          li.innerHTML = `
-            <div class="card-header">Carte ${i}</div>
-            <div class="card">
-              <div class="left-side">${i}</div>
-              <div class="right-side"></div>
-            </div>
-          `;
-          list.appendChild(li);
-        }
-      </script>
+      <li class="card-wrapper">
+        <div class="card-header">incubhacker</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
+      </li>
+      <li class="card-wrapper">
+        <div class="card-header">incubhacker</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
+      </li>
+      <li class="card-wrapper">
+        <div class="card-header">incubhacker</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
+      </li>
+      <li class="card-wrapper">
+        <div class="card-header">incubhacker</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
+      </li>
+      <li class="card-wrapper">
+        <div class="card-header">incubhacker</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
+      </li>
+      <li class="card-wrapper">
+        <div class="card-header">incubhacker</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
+      </li>
+      <li class="card-wrapper">
+        <div class="card-header">incubhacker</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
+      </li>
+      <li class="card-wrapper">
+        <div class="card-header">incubhacker</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
+      </li>
+      <li class="card-wrapper">
+        <div class="card-header">incubhacker</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
+      </li>
+      <li class="card-wrapper">
+        <div class="card-header">incubhacker</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
+      </li>
+      <li class="card-wrapper">
+        <div class="card-header">incubhacker</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
+      </li>
+      <li class="card-wrapper">
+        <div class="card-header">incubhacker</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
+      </li>
+      <li class="card-wrapper">
+        <div class="card-header">incubhacker</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
+      </li>
+      <li class="card-wrapper">
+        <div class="card-header">incubhacker</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
+      </li>
+      <li class="card-wrapper">
+        <div class="card-header">incubhacker</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
+      </li>
+      <li class="card-wrapper">
+        <div class="card-header">incubhacker</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
+      </li>
+      <li class="card-wrapper">
+        <div class="card-header">incubhacker</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
+      </li>
+      <li class="card-wrapper">
+        <div class="card-header">incubhacker</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
+      </li>
+      <li class="card-wrapper">
+        <div class="card-header">incubhacker</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
+      </li>
+      <li class="card-wrapper">
+        <div class="card-header">incubhacker</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
+      </li>
+      <li class="card-wrapper">
+        <div class="card-header">incubhacker</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
+      </li>
+      <li class="card-wrapper">
+        <div class="card-header">incubhacker</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
+      </li>
+      <li class="card-wrapper">
+        <div class="card-header">incubhacker</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
+      </li>
+      <li class="card-wrapper">
+        <div class="card-header">incubhacker</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
+      </li>
+      <li class="card-wrapper">
+        <div class="card-header">incubhacker</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
+      </li>
+      <li class="card-wrapper">
+        <div class="card-header">incubhacker</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
+      </li>
+      <li class="card-wrapper">
+        <div class="card-header">incubhacker</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
+      </li>
+      <li class="card-wrapper">
+        <div class="card-header">incubhacker</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
+      </li>
+      <li class="card-wrapper">
+        <div class="card-header">incubhacker</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
+      </li>
+      <li class="card-wrapper">
+        <div class="card-header">incubhacker</div>
+        <div class="card">
+          <div class="left-side">0</div>
+          <div class="right-side"></div>
+        </div>
+      </li>
+      <!-- Un total de 31 cartes pour créer un effet de défilement long -->
     </ul>
 
     <div class="actions">
+      <!-- Boutons de navigation manuelle liés aux événements JS .next et .prev -->
       <button class="prev">Prev</button>
       <button class="next">Next</button>
     </div>

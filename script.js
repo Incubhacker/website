@@ -204,3 +204,4 @@ setInterval(updateActiveCard, 100);
 
 // Lancement initial
 scheduleAutoScroll(3000);
+
