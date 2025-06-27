@@ -2,7 +2,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 let iteration = 0;
 
-const spacing = 0.05,
+const spacing = 0.1,
   snap = gsap.utils.snap(spacing),
   cards = gsap.utils.toArray('.cards li'),
   seamlessLoop = buildSeamlessLoop(cards, spacing),

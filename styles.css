@@ -125,10 +125,7 @@ body {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
   z-index: 0;
-  background: black url("/assets/logo%20oeuf%20bgV2.svg") no-repeat 100% 50%;
-  background-size: contain;
-  background-attachment: fixed;
-  opacity: 0.2;
+  
   pointer-events: none;
   border-radius: 1.2rem;
 }
@@ -146,6 +143,13 @@ body {
   align-items: center;
   justify-content: center;
   padding: 1rem;
+}
+
+.card > .right-side {
+  background: black url("/assets/logo%20oeuf%20bgV2.svg") no-repeat 100% 50%;
+  background-size: contain;
+  background-attachment: fixed;
+  opacity: 0.2;
 }
 
 /* Actions / boutons */
