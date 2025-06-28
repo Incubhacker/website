@@ -1,13 +1,14 @@
-
-*@font-face {
+/* ============================
+   POLICES ET RÉGLAGES GÉNÉRAUX
+============================ */
+@font-face {
   font-family: 'Seeds';
-  src: url('/assets/fonts/SEEDS.TTF') format('truetype');
+  src: url('./assets/fonts/SEEDS.TTF') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
-
-{
+* {
   box-sizing: border-box;
 }
 
@@ -19,6 +20,9 @@ body {
   padding: 0;
 }
 
+/* ========================
+   STRUCTURE DE BASE
+======================== */
 .gallery {
   position: absolute;
   width: 100%;
@@ -33,7 +37,7 @@ body {
   width: 100vw;
   height: 100vh;
   background-color: black;
-  background-image: url("/assets/logo%20oeuf%20bgV2.svg");
+  background-image: url("./assets/logo%20oeuf%20bgV2.svg");
   background-repeat: no-repeat;
   background-position: 100% 50%;
   background-size: auto;
@@ -42,7 +46,9 @@ body {
   z-index: -1;
 }
 
-/* Wrapper contenant carte + entête */
+/* ========================
+   LAYOUT DES CARTES
+======================== */
 .cards {
   position: absolute;
   width: 80%;
@@ -74,85 +80,22 @@ body {
   left: 0;
 }
 
-.card-header {
-  font-family: Seeds, sans-serif;
-  position: absolute;
-  bottom: 100%;
-  left: 0;
-  width: 100%;
-  padding: 0rem 0rem;
-  background-color: transparent;
-  color: white;
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  text-align: start;
-  z-index: 10;
-  pointer-events: none;
-}
-
-.card-footer {
-  position: absolute;
-  top: 101%;
-  left: 0;
-  width: 100%;
-  padding: 0rem 0rem;
-  background-color: transparent;
-  color: white;
-  font-size: clamp(1.25rem, 5vw, 2rem);
-  text-align: end;
-  z-index: 10;
-  pointer-events: none;
-}
-
+/* ========================
+   CLASSE CARD GÉNÉRIQUE MINIMALE
+======================== */
 .card {
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: row;
-  border-radius: 1.2rem;
-  background-color: black;
-  color: white;
-  font-weight: bold;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   position: relative;
-  font-size: 5vw;
   overflow: hidden;
-  border: 3px solid white;
+  border-radius: 1.2rem;
   box-sizing: border-box;
 }
 
-.card::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  z-index: 0;
-  
-  pointer-events: none;
-  border-radius: 1.2rem;
-}
 
-@media (max-aspect-ratio: 1/1) {
-  .card {
-    flex-direction: column;
-  }
-}
-
-.card > .left-side,
-.card > .right-side {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-}
-
-.card > .right-side {
-  background: black url("/assets/logo%20oeuf%20bgV2.svg") no-repeat 100% 50%;
-  background-size: contain;
-  background-attachment: fixed;
-  opacity: 0.2;
-}
-
-/* Actions / boutons */
+/* ========================
+   ACTIONS / BOUTONS
+======================== */
 .actions {
   position: absolute;
   bottom: 25px;
@@ -194,4 +137,38 @@ a {
 }
 a:hover {
   text-decoration: underline;
+}
+
+
+/* ===============================
+   PERSONNALISATION PAR .card-1 à .card-14
+   (Individuel, complet, tous paramètres inclus)
+================================ */
+
+
+/* --- END OF CARDS --- */
+
+/* General body and html styling */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #121212;
+  color: #eee;
+}
+
+/* Container for all cards */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Utility class for text shadow */
+.text-shadow {
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
 }

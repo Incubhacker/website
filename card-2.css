@@ -1,0 +1,75 @@
+/* --- CARD 2 --- */
+.card-2 {
+    background-color: #111111;
+    color: #eee;
+    font-weight: 600;
+    font-size: 4.8vw;
+    border: 2px solid #ccc;
+    border-radius: 1rem;
+    box-shadow: 0 6px 28px rgba(0,0,0,0.5);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+  }
+  
+  .card-2::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    border-radius: 1rem;
+    z-index: 0;
+  }
+  
+  .card-2 .card-header {
+    font-family: Seeds, sans-serif;
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    width: 100%;
+    background-color: transparent;
+    color: #eee;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    text-align: start;
+    z-index: 10;
+    pointer-events: none;
+  }
+  
+  .card-2 .card-footer {
+    position: absolute;
+    top: 101%;
+    left: 0;
+    width: 100%;
+    background-color: transparent;
+    color: #eee;
+    font-size: clamp(1.1rem, 5vw, 1.8rem);
+    text-align: end;
+    z-index: 10;
+    pointer-events: none;
+  }
+  
+  .card-2 > .left-side,
+  .card-2 > .right-side {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  
+  .card-2 > .right-side {
+    background: #111 url("./assets/logo%20oeuf%20bgV2.svg") no-repeat 100% 50%;
+    background-size: contain;
+    background-attachment: fixed;
+    opacity: 0.15;
+  }
+  
+  @media (max-aspect-ratio: 1/1) {
+    .card-2 {
+      flex-direction: column;
+    }
+  }
+  
+  
