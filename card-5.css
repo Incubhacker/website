@@ -21,26 +21,28 @@
   z-index: 0;
 }
 .card-5 .card-header {
-  font-family: Seeds, sans-serif;
+  font-family: var(--card-font-header-family);
   position: absolute;
-  bottom: 100%;
+  bottom: var(--header-position);
   left: 0;
   width: 100%;
   background-color: transparent;
-  color: white;
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: var(--card-text-color);
+  font-size: var(--header-font-size);
   text-align: start;
   z-index: 10;
   pointer-events: none;
 }
+
 .card-5 .card-footer {
+  font-family: var(--card-font-footer-family);
   position: absolute;
-  top: 101%;
+  top: var(--footer-position);
   left: 0;
   width: 100%;
   background-color: transparent;
-  color: white;
-  font-size: clamp(1.25rem, 5vw, 2rem);
+  color: var(--card-text-color);
+  font-size: var(--footer-font-size);
   text-align: end;
   z-index: 10;
   pointer-events: none;
@@ -57,7 +59,7 @@
   background: black url("./assets/logo%20oeuf%20bgV2.svg") no-repeat 100% 50%;
   background-size: contain;
   background-attachment: fixed;
-  opacity: 0.2;
+  border-radius: 1rem;
 }
 @media (max-aspect-ratio: 1/1) {
   .card-5 {

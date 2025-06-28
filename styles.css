@@ -1,6 +1,16 @@
 /* ============================
    POLICES ET RÉGLAGES GÉNÉRAUX
 ============================ */
+:root {
+  --header-position: 101%;
+  --footer-position: 101%;
+  --header-font-size:d clamp(2.75rem, 5vw, 4rem);
+  --footer-font-size: clamp(1rem, 5vw, 1.75rem);
+  --card-text-color: white;
+  --card-font-header-family: Seeds, sans-serif;
+  --card-font-footer-family: Arimo,"sans-serif";
+}
+
 @font-face {
   font-family: 'Seeds';
   src: url('./assets/fonts/SEEDS.TTF') format('truetype');
@@ -42,7 +52,6 @@ body {
   background-position: 100% 50%;
   background-size: auto;
   background-attachment: fixed;
-  opacity: 0.1;
   z-index: -1;
 }
 
@@ -60,6 +69,7 @@ body {
   list-style: none;
   padding: 0;
   margin: 0;
+  z-index: 1O;
 }
 
 @media (max-aspect-ratio: 1/1) {
@@ -69,6 +79,7 @@ body {
     max-height: 80vh;
     max-width: calc(80vh * 9 / 16);
     min-width: 200px;
+    z-index: 1O;
   }
 }
 
@@ -78,6 +89,7 @@ body {
   height: 100%;
   top: 0;
   left: 0;
+  z-index: 1O;
 }
 
 /* ========================
@@ -90,6 +102,7 @@ body {
   overflow: hidden;
   border-radius: 1.2rem;
   box-sizing: border-box;
+  z-index: 1O;
 }
 
 
@@ -153,7 +166,7 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #121212;
+  background-color: transparent;
   color: #eee;
 }
 
