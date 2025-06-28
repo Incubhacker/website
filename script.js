@@ -38,7 +38,7 @@ function wrapForward(trigger) {
 function wrapBackward(trigger) {
   iteration--;
   if (iteration < 0) {
-    iteration = Math.max(0, Math.ceil(cards.length / (1 / spacing)) - 1);
+    iteration = 9;
     seamlessLoop.totalTime(seamlessLoop.totalTime() + seamlessLoop.duration() * 10);
     scrub.pause();
   }
