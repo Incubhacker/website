@@ -3,8 +3,8 @@
 ============================ */
 :root {
   --header-position: 101%;
-  --footer-position: 101%;
-  --header-font-size:d clamp(2.75rem, 5vw, 4rem);
+  --footer-position: 102%;
+  --header-font-size: clamp(2rem, 5vw, 2rem);
   --footer-font-size: clamp(2rem, 5vw, 3rem);
   --card-text-color: white;
   --card-font-footer-family: Seeds, sans-serif;
@@ -63,7 +63,7 @@ body {
   width: 80%;
   aspect-ratio: 16 / 9;
   max-width: 60rem;
-  top: 50%;
+  top: 53%;
   left: 50%;
   transform: translate(-50%, -55%);
   list-style: none;
@@ -76,8 +76,8 @@ body {
   .cards {
     aspect-ratio: 9 / 16;
     width: 60vw;
-    max-height: 80vh;
-    max-width: calc(80vh * 9 / 16);
+    max-height: 70vh;
+    max-width: calc(70vh * 9 / 16);
     min-width: 200px;
     z-index: 1O;
   }
