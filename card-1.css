@@ -12,7 +12,6 @@
   flex-direction: row;
   box-sizing: border-box;
 }
-
 .card-1::before {
   content: "";
   position: absolute;
@@ -21,7 +20,6 @@
   border-radius: 1.2rem;
   z-index: 0;
 }
-
 .card-1 .card-header {
   font-family: var(--card-font-header-family);
   position: absolute;
@@ -49,7 +47,6 @@
   z-index: 10;
   pointer-events: none;
 }
-
 .card-1 > .left-side,
 .card-1 > .right-side {
   flex: 1;
@@ -58,14 +55,13 @@
   justify-content: center;
   padding: 1rem;
 }
-
 .card-1 > .right-side {
   background: black url("./assets/logo%20oeuf%20bgV2.svg") no-repeat 100% 50%;
   background-size: contain;
   background-attachment: fixed;
   border-radius: 1rem;
-}
 
+}
 @media (max-aspect-ratio: 1/1) {
   .card-1 {
     flex-direction: column;
