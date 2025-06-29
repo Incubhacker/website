@@ -5,15 +5,15 @@
   --header-position: 101%;
   --footer-position: 101%;
   --header-font-size:d clamp(2.75rem, 5vw, 4rem);
-  --footer-font-size: clamp(1rem, 5vw, 1.75rem);
+  --footer-font-size: clamp(2rem, 5vw, 3rem);
   --card-text-color: white;
-  --card-font-header-family: Seeds, sans-serif;
-  --card-font-footer-family: Arimo,"sans-serif";
+  --card-font-footer-family: Seeds, sans-serif;
+  --card-font-header-family: Arial,"sans-serif";
 }
 
 @font-face {
   font-family: 'Seeds';
-  src: url('./assets/fonts/SEEDS.TTF') format('truetype');
+  src: url('./assets/SEEDS.TTF') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -166,7 +166,6 @@ a:hover {
 html, body {
   margin: 0;
   padding: 0;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: transparent;
   color: #eee;
 }
@@ -176,8 +175,8 @@ html, body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2rem;
-  padding: 2rem;
+  gap: 0rem;
+  padding: 0rem;
   max-width: 1200px;
   margin: auto;
 }

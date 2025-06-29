@@ -200,26 +200,55 @@ function updateActiveCard() {
   }
 }
 
-function textToPNG(text, width = 300, height = 150, font = 'bold 28px Arial', color = 'white') {
+function wrapText(ctx, text, maxWidth) {
+  const words = text.split(' ');
+  const lines = [];
+  let line = '';
+
+  for (let i = 0; i < words.length; i++) {
+    const testLine = line + words[i] + ' ';
+    const testWidth = ctx.measureText(testLine).width;
+
+    if (testWidth > maxWidth && i > 0) {
+      lines.push(line.trim());
+      line = words[i] + ' ';
+    } else {
+      line = testLine;
+    }
+  }
+  lines.push(line.trim());
+  return lines;
+}
+
+function textToPNG(text, width = 600, height = 500, font = 'bold 36px Arial', color = 'white', align = 'center') {
   const canvas = document.createElement('canvas');
   canvas.width = width;
   canvas.height = height;
   const ctx = canvas.getContext('2d');
 
-  ctx.clearRect(0, 0, width, height); // fond transparent
+  ctx.clearRect(0, 0, width, height);
+
   ctx.fillStyle = color;
   ctx.font = font;
   ctx.textBaseline = 'middle';
-  ctx.textAlign = 'center';
+  ctx.textAlign = align;
 
-  // Gestion du texte multiligne
-  const lines = text.split('\n');
-  const lineHeight = 32;
+  const lines = wrapText(ctx, text, width * 0.9);
+  const lineHeight = 40;
   const totalHeight = lines.length * lineHeight;
   let startY = (height - totalHeight) / 2 + lineHeight / 2;
 
+  let x;
+  if (align === 'right') {
+    x = width * 0.95;
+  } else if (align === 'left') {
+    x = width * 0.05;
+  } else {
+    x = width / 2;
+  }
+
   lines.forEach(line => {
-    ctx.fillText(line, width / 2, startY);
+    ctx.fillText(line, x, startY);
     startY += lineHeight;
   });
 
@@ -230,22 +259,36 @@ window.addEventListener('DOMContentLoaded', () => {
   const cards = document.querySelectorAll('.card-1, .card-2, .card-3, .card-4, .card-5, .card-6, .card-7, .card-8, .card-9, .card-10, .card-11, .card-12, .card-13, .card-14, .card-15');
 
   cards.forEach(card => {
-    ['left-side', 'right-side'].forEach(sideClass => {
-      const side = card.querySelector(`.${sideClass}`);
-      if (side) {
-        const texteOriginal = side.textContent.trim();
-        if (texteOriginal) {
-          const img = document.createElement('img');
-          img.src = textToPNG(texteOriginal, 400, 200, 'bold 28px Arial', 'white');
-          img.style.width = '100%';
-          img.style.height = 'auto';
-          side.innerHTML = '';
-          side.appendChild(img);
-        }
+    const leftSide = card.querySelector('.left-side');
+    if (leftSide) {
+      const texteOriginal = leftSide.textContent.trim();
+      if (texteOriginal) {
+        const img = document.createElement('img');
+        img.src = textToPNG(texteOriginal, 600, 500, 'bold 36px Arial', 'white', 'center');
+        img.style.width = '100%';
+        img.style.height = 'auto';
+        leftSide.innerHTML = '';
+        leftSide.appendChild(img);
       }
-    });
+    }
+
+    const rightSide = card.querySelector('.right-side');
+    if (rightSide) {
+      const texteOriginal = rightSide.textContent.trim();
+      if (texteOriginal) {
+        const img = document.createElement('img');
+        img.src = textToPNG(texteOriginal, 600, 500, 'bold 36px Arial', 'white', 'center');
+        img.style.width = '100%';
+        img.style.height = 'auto';
+        rightSide.innerHTML = '';
+        rightSide.appendChild(img);
+      }
+    }
   });
 });
+
+
+
 
 
 setInterval(updateActiveCard, 100);
