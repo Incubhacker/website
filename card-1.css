@@ -12,6 +12,7 @@
   flex-direction: row;
   box-sizing: border-box;
 }
+
 .card-1::before {
   content: "";
   position: absolute;
@@ -20,6 +21,7 @@
   border-radius: 1.2rem;
   z-index: 0;
 }
+
 .card-1 .card-header {
   font-family: var(--card-font-header-family);
   position: absolute;
@@ -47,6 +49,7 @@
   z-index: 10;
   pointer-events: none;
 }
+
 .card-1 > .left-side,
 .card-1 > .right-side {
   flex: 1;
@@ -54,25 +57,49 @@
   align-items: center;
   justify-content: center;
   padding: 1rem;
+  position: relative;
+  border-radius: 1rem;
+  overflow: visible;
 }
+
 .card-1 > .left-side {
   background: black url("./assets/convivialité.jpg") no-repeat 100% 50%;
   background-size: cover;
   background-position: left;
   background-attachment: fixed;
-  border-radius: 1rem;
-
 }
 
+/* Pseudo pour débordement + dégradé de l’image à droite */
+@media (min-aspect-ratio: 1/1) {
+  .card-1 > .left-side::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 100%; /* à droite de la box left-side */
+    width: 8rem; /* largeur du débordement */
+    background: url("./assets/convivialité.jpg") no-repeat left center;
+    background-size: cover;
+    border-radius: 0 1rem 1rem 0;
+    pointer-events: none;
+    z-index: 1;
+    /* masque dégradé pour fondu à droite */
+    mask-image: linear-gradient(to right, rgba(0,0,0,9), rgba(0,0,0,0));
+    -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,9), rgba(0,0,0,0));
+  }
+}
+
+/* right-side inchangé */
 .card-1 > .right-side {
   background: black url("./assets/logo%20oeuf%20bgV2.svg") no-repeat 100% 50%;
   background-size: contain;
   background-attachment: fixed;
   border-radius: 1rem;
-
 }
+
+/* mode portrait - flex colonne */
 @media (max-aspect-ratio: 1/1) {
   .card-1 {
     flex-direction: column;
   }
 }
+
