@@ -55,6 +55,14 @@
   justify-content: center;
   padding: 1rem;
 }
+.card-1 > .left-side {
+  background: black url("./assets/logo%20oeuf%20bgV2.svg") no-repeat 100% 50%;
+  background-size: contain;
+  background-attachment: fixed;
+  border-radius: 1rem;
+
+}
+
 .card-1 > .right-side {
   background: black url("./assets/logo%20oeuf%20bgV2.svg") no-repeat 100% 50%;
   background-size: contain;
