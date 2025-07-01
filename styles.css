@@ -185,3 +185,8 @@ html, body {
 .text-shadow {
   text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
 }
+
+.generated-text-img[src=""],
+.generated-text-img:not([src]) {
+  display: none !important;
+}

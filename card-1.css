@@ -13,10 +13,34 @@
   box-sizing: border-box;
 }
 
+/* Dégradé image débordante depuis la gauche vers la droite */
+@media (min-aspect-ratio: 1/1) {
+  .card-1::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 70%;
+    background: url("./assets/convivialité.jpg") no-repeat left center;
+    background-size: cover;
+    pointer-events: none;
+    z-index: 2;
+    border-radius: 1.2rem;
+
+    /* Dégradé de gauche (opaque) vers droite (transparent) */
+    mask-image: linear-gradient(to right, black 70%, transparent);
+    -webkit-mask-image: linear-gradient(to right, black 70%, transparent);
+  }
+}
+
 .card-1::before {
   content: "";
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   pointer-events: none;
   border-radius: 1.2rem;
   z-index: 0;
@@ -32,7 +56,7 @@
   color: var(--card-text-color);
   font-size: var(--header-font-size);
   text-align: start;
-  z-index: 10;
+  z-index: 3;
   pointer-events: none;
 }
 
@@ -46,7 +70,7 @@
   color: var(--card-text-color);
   font-size: var(--footer-font-size);
   text-align: end;
-  z-index: 10;
+  z-index: 3;
   pointer-events: none;
 }
 
@@ -60,8 +84,10 @@
   position: relative;
   border-radius: 1rem;
   overflow: visible;
+  z-index: 1; /* inférieur à ::after */
 }
 
+/* Image normale pour .left-side (sans débordement) */
 .card-1 > .left-side {
   background: black url("./assets/convivialité.jpg") no-repeat 100% 50%;
   background-size: cover;
@@ -69,37 +95,45 @@
   background-attachment: fixed;
 }
 
-/* Pseudo pour débordement + dégradé de l’image à droite */
-@media (min-aspect-ratio: 1/1) {
-  .card-1 > .left-side::after {
-    content: "";
-    position: absolute;
-    top: 0; bottom: 0;
-    left: 100%; /* à droite de la box left-side */
-    width: 8rem; /* largeur du débordement */
-    background: url("./assets/convivialité.jpg") no-repeat left center;
-    background-size: cover;
-    border-radius: 0 1rem 1rem 0;
-    pointer-events: none;
-    z-index: 1;
-    /* masque dégradé pour fondu à droite */
-    mask-image: linear-gradient(to right, rgba(0,0,0,9), rgba(0,0,0,0));
-    -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,9), rgba(0,0,0,0));
-  }
-}
-
-/* right-side inchangé */
+/* Logo à droite */
 .card-1 > .right-side {
   background: black url("./assets/logo%20oeuf%20bgV2.svg") no-repeat 100% 50%;
   background-size: contain;
   background-attachment: fixed;
   border-radius: 1rem;
+  z-index: 2;
 }
 
-/* mode portrait - flex colonne */
+/* Texte PNG généré – toujours au-dessus */
+.card-1 .overlay-text {
+  position: absolute;
+  inset: 0;
+  z-index: 1001;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-1 .overlay-text img.generated-text-img {
+  width: 90%;
+  height: auto;
+  object-fit: contain;
+  user-select: none;
+
+  /* Ne subit pas de masquage */
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
+
+/* Mode portrait (mobile) : colonne */
 @media (max-aspect-ratio: 1/1) {
   .card-1 {
     flex-direction: column;
   }
-}
 
+  /* En portrait, on cache le débordement */
+  .card-1::after {
+    display: none;
+  }
+}
