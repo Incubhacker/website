@@ -9,29 +9,8 @@
   overflow: visible;
   position: relative;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   box-sizing: border-box;
-}
-
-/* Dégradé image débordante depuis la gauche vers la droite */
-@media (min-aspect-ratio: 1/1) {
-  .card-1::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 70%;
-    background: url("./assets/convivialité.jpg") no-repeat left center;
-    background-size: cover;
-    pointer-events: none;
-    z-index: 2;
-    border-radius: 1.2rem;
-
-    /* Dégradé de gauche (opaque) vers droite (transparent) */
-    mask-image: linear-gradient(to right, black 70%, transparent);
-    -webkit-mask-image: linear-gradient(to right, black 70%, transparent);
-  }
 }
 
 .card-1::before {
@@ -74,33 +53,55 @@
   pointer-events: none;
 }
 
-.card-1 > .left-side,
-.card-1 > .right-side {
+/* --- NOUVELLE STRUCTURE FLEX --- */
+.card-1 .back-side {
+  aspect-ratio: 16 / 9;
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  border-radius: 1.2rem;
+  overflow: hidden;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+/* Responsive : colonne en portrait avec aspect ratio 9/16 */
+@media (max-aspect-ratio: 1/1) {
+  .card-1 .back-side {
+    aspect-ratio: 9 / 16;
+    flex-direction: column;
+  }
+}
+
+.card-1 .back-side .left-side,
+.card-1 .back-side .right-side {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1rem;
   position: relative;
+  overflow: hidden;
   border-radius: 1rem;
-  overflow: visible;
-  z-index: 1; /* inférieur à ::after */
 }
 
-/* Image normale pour .left-side (sans débordement) */
-.card-1 > .left-side {
-  background: black url("./assets/convivialité.jpg") no-repeat 100% 50%;
+/* Background image sur left-side avec masque */
+.card-1 .back-side .left-side {
+  background: black url("./assets/convivialité.jpg") no-repeat left center;
   background-size: cover;
-  background-position: left;
   background-attachment: fixed;
+  mask-image: linear-gradient(to right, black 70%, transparent);
+  -webkit-mask-image: linear-gradient(to right, black 70%, transparent);
+  z-index: 2;
 }
 
-/* Logo à droite */
-.card-1 > .right-side {
+/* Background logo sur right-side */
+.card-1 .back-side .right-side {
   background: black url("./assets/logo%20oeuf%20bgV2.svg") no-repeat 100% 50%;
   background-size: contain;
   background-attachment: fixed;
-  border-radius: 1rem;
   z-index: 2;
 }
 
@@ -121,19 +122,6 @@
   object-fit: contain;
   user-select: none;
 
-  /* Ne subit pas de masquage */
   -webkit-mask-image: none !important;
   mask-image: none !important;
-}
-
-/* Mode portrait (mobile) : colonne */
-@media (max-aspect-ratio: 1/1) {
-  .card-1 {
-    flex-direction: column;
-  }
-
-  /* En portrait, on cache le débordement */
-  .card-1::after {
-    display: none;
-  }
 }

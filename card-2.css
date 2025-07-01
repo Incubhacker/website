@@ -1,5 +1,5 @@
-/* --- CARD 2 --- */
-.card-2 {
+/* --- CARD 3 --- */
+.card-3 {
   background-color: #000000;
   color: white;
   font-weight: bold;
@@ -12,7 +12,7 @@
   flex-direction: row;
   box-sizing: border-box;
 }
-.card-2::before {
+.card-3::before {
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -20,7 +20,7 @@
   border-radius: 1.2rem;
   z-index: 0;
 }
-.card-2 .card-header {
+.card-3 .card-header {
   font-family: var(--card-font-header-family);
   position: absolute;
   bottom: var(--header-position);
@@ -34,7 +34,7 @@
   pointer-events: none;
 }
 
-.card-2 .card-footer {
+.card-3 .card-footer {
   font-family: var(--card-font-footer-family);
   position: absolute;
   top: var(--footer-position);
@@ -47,23 +47,23 @@
   z-index: 10;
   pointer-events: none;
 }
-.card-2 > .left-side,
-.card-2 > .right-side {
+.card-3 > .left-side,
+.card-3 > .right-side {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1rem;
 }
-.card-2 > .right-side {
+.card-3 > .right-side {
   background: black url("./assets/logo%20oeuf%20bgV2.svg") no-repeat 100% 50%;
   background-size: contain;
   background-attachment: fixed;
   border-radius: 1rem;
-
+  
 }
 @media (max-aspect-ratio: 1/1) {
-  .card-2 {
+  .card-3 {
     flex-direction: column;
   }
 }
