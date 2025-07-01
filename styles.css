@@ -1,9 +1,19 @@
 /* ============================
    POLICES ET RÉGLAGES GÉNÉRAUX
 ============================ */
+:root {
+  --header-position: 101%;
+  --footer-position: 102%;
+  --header-font-size: clamp(2rem, 5vw, 2rem);
+  --footer-font-size: clamp(2rem, 5vw, 3rem);
+  --card-text-color: white;
+  --card-font-footer-family: Seeds, sans-serif;
+  --card-font-header-family: Arial,"sans-serif";
+}
+
 @font-face {
   font-family: 'Seeds';
-  src: url('./assets/fonts/SEEDS.TTF') format('truetype');
+  src: url('./assets/SEEDS.TTF') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -42,7 +52,6 @@ body {
   background-position: 100% 50%;
   background-size: auto;
   background-attachment: fixed;
-  opacity: 0.1;
   z-index: -1;
 }
 
@@ -54,21 +63,23 @@ body {
   width: 80%;
   aspect-ratio: 16 / 9;
   max-width: 60rem;
-  top: 50%;
+  top: 53%;
   left: 50%;
   transform: translate(-50%, -55%);
   list-style: none;
   padding: 0;
   margin: 0;
+  z-index: 1O;
 }
 
 @media (max-aspect-ratio: 1/1) {
   .cards {
     aspect-ratio: 9 / 16;
     width: 60vw;
-    max-height: 80vh;
-    max-width: calc(80vh * 9 / 16);
+    max-height: 70vh;
+    max-width: calc(70vh * 9 / 16);
     min-width: 200px;
+    z-index: 1O;
   }
 }
 
@@ -78,6 +89,8 @@ body {
   height: 100%;
   top: 0;
   left: 0;
+  z-index: 1O;
+  container-type: inline-size;
 }
 
 /* ========================
@@ -90,6 +103,7 @@ body {
   overflow: hidden;
   border-radius: 1.2rem;
   box-sizing: border-box;
+  z-index: 1O;
 }
 
 
@@ -152,8 +166,7 @@ a:hover {
 html, body {
   margin: 0;
   padding: 0;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #121212;
+  background-color: transparent;
   color: #eee;
 }
 
@@ -162,8 +175,8 @@ html, body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2rem;
-  padding: 2rem;
+  gap: 0rem;
+  padding: 0rem;
   max-width: 1200px;
   margin: auto;
 }
@@ -171,4 +184,9 @@ html, body {
 /* Utility class for text shadow */
 .text-shadow {
   text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+}
+
+.generated-text-img[src=""],
+.generated-text-img:not([src]) {
+  display: none !important;
 }
