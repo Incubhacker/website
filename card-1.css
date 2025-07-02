@@ -53,7 +53,7 @@
   pointer-events: none;
 }
 
-/* --- NOUVELLE STRUCTURE FLEX --- */
+/* --- BACK SIDE FLEX LAYOUT --- */
 .card-1 .back-side {
   aspect-ratio: 16 / 9;
   max-width: 100%;
@@ -61,10 +61,18 @@
   display: flex;
   flex-direction: row;
   position: relative;
-  border-radius: 1.2rem;
+  border-radius: 1rem;
   overflow: hidden;
   box-sizing: border-box;
   z-index: 1;
+
+  background: black url("./assets/convivialité.jpg") no-repeat left top;
+  background-size: contain ;
+  background-attachment: fixed;
+
+  /* Fondu à droite : dégradé masque de transparent à noir */
+  mask-image: linear-gradient(to right, black 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, black 70%, transparent 100%);
 }
 
 /* Responsive : colonne en portrait avec aspect ratio 9/16 */
@@ -72,6 +80,15 @@
   .card-1 .back-side {
     aspect-ratio: 9 / 16;
     flex-direction: column;
+
+    background-position: left top;
+    background-size: auto 50%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    /* Pas de dégradé */
+    mask-image: none;
+    -webkit-mask-image: none;
   }
 }
 
@@ -89,17 +106,12 @@
 
 /* Background image sur left-side avec masque */
 .card-1 .back-side .left-side {
-  background: black url("./assets/convivialité.jpg") no-repeat left center;
-  background-size: cover;
-  background-attachment: fixed;
-  mask-image: linear-gradient(to right, black 70%, transparent);
-  -webkit-mask-image: linear-gradient(to right, black 70%, transparent);
   z-index: 2;
 }
 
 /* Background logo sur right-side */
 .card-1 .back-side .right-side {
-  background: black url("./assets/logo%20oeuf%20bgV2.svg") no-repeat 100% 50%;
+  background: url("./assets/logo%20oeuf%20bgV2.svg") no-repeat 100% 50%;
   background-size: contain;
   background-attachment: fixed;
   z-index: 2;
