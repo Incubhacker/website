@@ -1,9 +1,10 @@
 gsap.registerPlugin(ScrollTrigger);
 
 let iteration = 0;
-let autoScroll; // Déclaration en haut
+let autoScroll;
 let resumeTimeout;
 let isHovered = false;
+let isOverActiveCard = false;
 
 const spacing = 0.1,
   snap = gsap.utils.snap(spacing),
@@ -14,12 +15,50 @@ const spacing = 0.1,
     duration: 1.5,
     ease: "power3",
     paused: true
+  }),
+  trigger = ScrollTrigger.create({
+    start: 0,
+    onUpdate(self) {
+      if (self.progress === 1 && self.direction > 0 && !self.wrapping) {
+        wrapForward(self);
+      } else if (self.progress < 1e-5 && self.direction < 0 && !self.wrapping) {
+        wrapBackward(self);
+      } else {
+        scrub.vars.totalTime = snap((iteration + self.progress) * seamlessLoop.duration());
+        scrub.invalidate().restart();
+        self.wrapping = false;
+      }
+    },
+    end: "+=3000",
+    pin: ".main-flexbox"
   });
 
-// Pas de ScrollTrigger pour l'instant, on va utiliser les événements directs
+function wrapForward(trigger) {
+  iteration++;
+  trigger.wrapping = true;
+  trigger.scroll(trigger.start + 1);
+}
+
+function wrapBackward(trigger) {
+  iteration--;
+  if (iteration < 0) {
+    iteration = 9;
+    seamlessLoop.totalTime(seamlessLoop.totalTime() + seamlessLoop.duration() * 10);
+    scrub.pause();
+  }
+  trigger.wrapping = true;
+  trigger.scroll(trigger.end - 1);
+}
+
 function scrubTo(totalTime) {
-  scrub.vars.totalTime = snap(totalTime);
-  scrub.invalidate().restart();
+  let progress = (totalTime - seamlessLoop.duration() * iteration) / seamlessLoop.duration();
+  if (progress > 1) {
+    wrapForward(trigger);
+  } else if (progress < 0) {
+    wrapBackward(trigger);
+  } else {
+    trigger.scroll(trigger.start + progress * (trigger.end - trigger.start));
+  }
 }
 
 // Événements boutons
@@ -41,19 +80,21 @@ if (prevBtn) {
   });
 }
 
-// Événements molette sur la flexbox
+// Événements molette
 if (flexbox) {
   flexbox.addEventListener("wheel", (e) => {
-    e.preventDefault();
-    if (e.deltaY > 0) {
-      scrubTo(scrub.vars.totalTime + spacing);
-    } else {
-      scrubTo(scrub.vars.totalTime - spacing);
+    if (isOverActiveCard) {
+      e.preventDefault();
+      if (e.deltaY > 0) {
+        scrubTo(scrub.vars.totalTime + spacing);
+      } else {
+        scrubTo(scrub.vars.totalTime - spacing);
+      }
+      manualInteraction();
     }
-    manualInteraction();
   });
 
-  // Clavier sur la flexbox
+  // Clavier
   flexbox.addEventListener("keydown", (e) => {
     if (e.key === "ArrowRight") {
       e.preventDefault();
@@ -66,7 +107,6 @@ if (flexbox) {
     }
   });
 
-  // Rendre la flexbox focusable
   flexbox.setAttribute("tabindex", "0");
 }
 
@@ -86,27 +126,35 @@ function buildSeamlessLoop(items, spacing) {
     time = 0,
     i, index, item;
 
-  gsap.set(items, { xPercent: 400, opacity: 0, scale: 0 });
+  // 🎯 CORRECTION: Préserver les ratios CSS en utilisant transform au lieu de styles directs
+  gsap.set(items, { 
+    xPercent: 400, 
+    opacity: 0, 
+    //scale: 0,
+    force3D: true // Force l'accélération hardware sans affecter les dimensions
+  });
 
   for (i = 0; i < l; i++) {
     index = i % items.length;
     item = items[index];
     time = i * spacing;
-    rawSequence.fromTo(item, { scale: 0, opacity: 0 }, {
-      scale: 1,
+    rawSequence.fromTo(item, { opacity: 0 }, {
+      //scale: 1,
       opacity: 1,
       zIndex: 100,
       duration: 0.5,
       yoyo: true,
       repeat: 1,
       ease: "power1.in",
-      immediateRender: false
+      immediateRender: false,
+      //force3D: true // 🎯 CORRECTION: Préserver les ratios
     }, time)
     .fromTo(item, { xPercent: 400 }, {
       xPercent: -400,
       duration: 1,
       ease: "none",
-      immediateRender: false
+      immediateRender: false,
+      //force3D: true // 🎯 CORRECTION: Préserver les ratios
     }, time);
     i <= items.length && seamlessLoop.add("label" + i, time);
   }
@@ -155,11 +203,13 @@ let lastActiveCard = null;
 
 function pauseScrollAuto() {
   isHovered = true;
+  isOverActiveCard = true;
   pauseAutoScroll();
 }
 
 function resumeScrollAutoWithDelay() {
   isHovered = false;
+  isOverActiveCard = false;
   scheduleAutoScroll(3000);
 }
 
@@ -251,8 +301,10 @@ window.addEventListener('DOMContentLoaded', () => {
       if (texteOriginal) {
         const img = document.createElement('img');
         img.src = textToPNG(texteOriginal, 600, 500, 'bold 36px Arial', 'white', 'center');
+        // 🎯 CORRECTION: Préserver les ratios CSS des images
         img.style.width = '100%';
-        img.style.height = 'auto';
+        img.style.height = '100%';
+        img.style.objectFit = 'contain'; // Préserve les ratios
         leftSide.innerHTML = '';
         leftSide.appendChild(img);
       }
@@ -264,8 +316,10 @@ window.addEventListener('DOMContentLoaded', () => {
       if (texteOriginal) {
         const img = document.createElement('img');
         img.src = textToPNG(texteOriginal, 600, 500, 'bold 36px Arial', 'white', 'center');
+        // 🎯 CORRECTION: Préserver les ratios CSS des images
         img.style.width = '100%';
-        img.style.height = 'auto';
+        img.style.height = '100%';
+        img.style.objectFit = 'contain'; // Préserve les ratios
         rightSide.innerHTML = '';
         rightSide.appendChild(img);
       }
