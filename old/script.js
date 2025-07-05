@@ -25,7 +25,7 @@ const spacing = 0.1,
         self.wrapping = false;
       }
     },
-    end: "+=2000", // 🔧 RÉDUIT : 3000 → 2000 pour permettre l'accès au footer
+    end: "+=3000",
     pin: ".gallery"
   });
 
@@ -56,6 +56,15 @@ function scrubTo(totalTime) {
     trigger.scroll(trigger.start + progress * (trigger.end - trigger.start));
   }
 }
+
+document.querySelector(".next").addEventListener("click", () => {
+  scrubTo(scrub.vars.totalTime + spacing);
+  manualInteraction();
+});
+document.querySelector(".prev").addEventListener("click", () => {
+  scrubTo(scrub.vars.totalTime - spacing);
+  manualInteraction();
+});
 
 function buildSeamlessLoop(items, spacing) {
   let overlap = Math.ceil(1 / spacing),
@@ -138,7 +147,7 @@ function pauseAutoScroll() {
 
 function manualInteraction() {
   pauseAutoScroll();
-  scheduleAutoScroll(10000);
+  scheduleAutoScroll(12000);
 }
 
 // Clavier
@@ -154,35 +163,20 @@ window.addEventListener("keydown", (e) => {
   }
 });
 
+// Molette
+window.addEventListener("wheel", manualInteraction);
+
 // --- Survol uniquement sur la carte au premier plan ---
 let lastActiveCard = null;
 
 function pauseScrollAuto() {
   isHovered = true;
   pauseAutoScroll();
-  console.log("🎮 Contrôle utilisateur activé"); // 🔧 AJOUTÉ : Debug
 }
 
 function resumeScrollAutoWithDelay() {
   isHovered = false;
-  scheduleAutoScroll(10000);
-  console.log("🔄 Auto-scroll repris"); // 🔧 AJOUTÉ : Debug
-}
-
-// 🎮 Contrôle scroll sur carte active uniquement
-function handleCardWheel(e) {
-  if (!isHovered) return;
-  
-  e.preventDefault();
-  e.stopPropagation();
-  
-  if (e.deltaY > 0) {
-    scrubTo(scrub.vars.totalTime + spacing);
-  } else {
-    scrubTo(scrub.vars.totalTime - spacing);
-  }
-  
-  manualInteraction();
+  scheduleAutoScroll(3000);
 }
 
 function updateActiveCard() {
@@ -197,13 +191,11 @@ function updateActiveCard() {
       lastActiveCard.classList.remove("active");
       lastActiveCard.removeEventListener("mouseenter", pauseScrollAuto);
       lastActiveCard.removeEventListener("mouseleave", resumeScrollAutoWithDelay);
-      lastActiveCard.removeEventListener("wheel", handleCardWheel);
     }
 
     active.classList.add("active");
     active.addEventListener("mouseenter", pauseScrollAuto);
     active.addEventListener("mouseleave", resumeScrollAutoWithDelay);
-    active.addEventListener("wheel", handleCardWheel);
     lastActiveCard = active;
   }
 }
@@ -263,11 +255,7 @@ function textToPNG(text, width = 600, height = 500, font = 'bold 36px Arial', co
   return canvas.toDataURL('image/png');
 }
 
-// 🔧 ATTENDRE QUE LE DOM SOIT PRÊT
 window.addEventListener('DOMContentLoaded', () => {
-  console.log("✅ DOM prêt, initialisation...");
-  
-  // Conversion texte → PNG
   const cards = document.querySelectorAll('.card-1, .card-2, .card-3, .card-4, .card-5, .card-6, .card-7, .card-8, .card-9, .card-10, .card-11, .card-12, .card-13, .card-14, .card-15');
 
   cards.forEach(card => {
@@ -297,30 +285,14 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     }
   });
-
-  // 🔧 BOUTONS : Maintenant qu'ils existent !
-  const nextBtn = document.querySelector(".next");
-  const prevBtn = document.querySelector(".prev");
-
-  if (nextBtn) {
-    nextBtn.addEventListener("click", () => {
-      scrubTo(scrub.vars.totalTime + spacing);
-      manualInteraction();
-    });
-    console.log("✅ Bouton Next connecté");
-  }
-
-  if (prevBtn) {
-    prevBtn.addEventListener("click", () => {
-      scrubTo(scrub.vars.totalTime - spacing);
-      manualInteraction();
-    });
-    console.log("✅ Bouton Prev connecté");
-  }
-
-  // Lancement initial
-  scheduleAutoScroll(10000);
-  console.log("🚀 Animation démarrée");
 });
 
+
+
+
+
 setInterval(updateActiveCard, 100);
+
+// Lancement initial
+scheduleAutoScroll(3000);
+
