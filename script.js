@@ -1,6 +1,9 @@
 gsap.registerPlugin(ScrollTrigger);
 
 let iteration = 0;
+let autoScroll; // Déclaration en haut
+let resumeTimeout;
+let isHovered = false;
 
 const spacing = 0.1,
   snap = gsap.utils.snap(spacing),
@@ -11,50 +14,60 @@ const spacing = 0.1,
     duration: 1.5,
     ease: "power3",
     paused: true
-  }),
-  trigger = ScrollTrigger.create({
-    start: 0,
-    onUpdate(self) {
-      if (self.progress === 1 && self.direction > 0 && !self.wrapping) {
-        wrapForward(self);
-      } else if (self.progress < 1e-5 && self.direction < 0 && !self.wrapping) {
-        wrapBackward(self);
-      } else {
-        scrub.vars.totalTime = snap((iteration + self.progress) * seamlessLoop.duration());
-        scrub.invalidate().restart();
-        self.wrapping = false;
-      }
-    },
-    end: "+=2000", // 🔧 RÉDUIT : 3000 → 2000 pour permettre l'accès au footer
-    pin: ".gallery"
   });
 
-function wrapForward(trigger) {
-  iteration++;
-  trigger.wrapping = true;
-  trigger.scroll(trigger.start + 1);
-}
-
-function wrapBackward(trigger) {
-  iteration--;
-  if (iteration < 0) {
-    iteration = 9;
-    seamlessLoop.totalTime(seamlessLoop.totalTime() + seamlessLoop.duration() * 10);
-    scrub.pause();
-  }
-  trigger.wrapping = true;
-  trigger.scroll(trigger.end - 1);
-}
-
+// Pas de ScrollTrigger pour l'instant, on va utiliser les événements directs
 function scrubTo(totalTime) {
-  let progress = (totalTime - seamlessLoop.duration() * iteration) / seamlessLoop.duration();
-  if (progress > 1) {
-    wrapForward(trigger);
-  } else if (progress < 0) {
-    wrapBackward(trigger);
-  } else {
-    trigger.scroll(trigger.start + progress * (trigger.end - trigger.start));
-  }
+  scrub.vars.totalTime = snap(totalTime);
+  scrub.invalidate().restart();
+}
+
+// Événements boutons
+const nextBtn = document.querySelector(".next");
+const prevBtn = document.querySelector(".prev");
+const flexbox = document.querySelector(".main-flexbox");
+
+if (nextBtn) {
+  nextBtn.addEventListener("click", () => {
+    scrubTo(scrub.vars.totalTime + spacing);
+    manualInteraction();
+  });
+}
+
+if (prevBtn) {
+  prevBtn.addEventListener("click", () => {
+    scrubTo(scrub.vars.totalTime - spacing);
+    manualInteraction();
+  });
+}
+
+// Événements molette sur la flexbox
+if (flexbox) {
+  flexbox.addEventListener("wheel", (e) => {
+    e.preventDefault();
+    if (e.deltaY > 0) {
+      scrubTo(scrub.vars.totalTime + spacing);
+    } else {
+      scrubTo(scrub.vars.totalTime - spacing);
+    }
+    manualInteraction();
+  });
+
+  // Clavier sur la flexbox
+  flexbox.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      scrubTo(scrub.vars.totalTime + spacing);
+      manualInteraction();
+    } else if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      scrubTo(scrub.vars.totalTime - spacing);
+      manualInteraction();
+    }
+  });
+
+  // Rendre la flexbox focusable
+  flexbox.setAttribute("tabindex", "0");
 }
 
 function buildSeamlessLoop(items, spacing) {
@@ -112,11 +125,7 @@ function buildSeamlessLoop(items, spacing) {
   return seamlessLoop;
 }
 
-// Auto-scroll
-let autoScroll;
-let resumeTimeout;
-let isHovered = false;
-
+// Auto-scroll functions
 function scrollNext() {
   scrubTo(scrub.vars.totalTime + spacing);
   scheduleAutoScroll();
@@ -138,21 +147,8 @@ function pauseAutoScroll() {
 
 function manualInteraction() {
   pauseAutoScroll();
-  scheduleAutoScroll(10000);
+  scheduleAutoScroll(12000);
 }
-
-// Clavier
-window.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowRight") {
-    e.preventDefault();
-    scrubTo(scrub.vars.totalTime + spacing);
-    manualInteraction();
-  } else if (e.key === "ArrowLeft") {
-    e.preventDefault();
-    scrubTo(scrub.vars.totalTime - spacing);
-    manualInteraction();
-  }
-});
 
 // --- Survol uniquement sur la carte au premier plan ---
 let lastActiveCard = null;
@@ -160,32 +156,16 @@ let lastActiveCard = null;
 function pauseScrollAuto() {
   isHovered = true;
   pauseAutoScroll();
-  console.log("🎮 Contrôle utilisateur activé"); // 🔧 AJOUTÉ : Debug
 }
 
 function resumeScrollAutoWithDelay() {
   isHovered = false;
-  scheduleAutoScroll(10000);
-  console.log("🔄 Auto-scroll repris"); // 🔧 AJOUTÉ : Debug
-}
-
-// 🎮 Contrôle scroll sur carte active uniquement
-function handleCardWheel(e) {
-  if (!isHovered) return;
-  
-  e.preventDefault();
-  e.stopPropagation();
-  
-  if (e.deltaY > 0) {
-    scrubTo(scrub.vars.totalTime + spacing);
-  } else {
-    scrubTo(scrub.vars.totalTime - spacing);
-  }
-  
-  manualInteraction();
+  scheduleAutoScroll(3000);
 }
 
 function updateActiveCard() {
+  if (cards.length === 0) return;
+  
   let active = cards.reduce((maxEl, el) => {
     return (parseFloat(gsap.getProperty(el, "opacity")) || 0) >
            (parseFloat(gsap.getProperty(maxEl, "opacity")) || 0)
@@ -197,13 +177,11 @@ function updateActiveCard() {
       lastActiveCard.classList.remove("active");
       lastActiveCard.removeEventListener("mouseenter", pauseScrollAuto);
       lastActiveCard.removeEventListener("mouseleave", resumeScrollAutoWithDelay);
-      lastActiveCard.removeEventListener("wheel", handleCardWheel);
     }
 
     active.classList.add("active");
     active.addEventListener("mouseenter", pauseScrollAuto);
     active.addEventListener("mouseleave", resumeScrollAutoWithDelay);
-    active.addEventListener("wheel", handleCardWheel);
     lastActiveCard = active;
   }
 }
@@ -263,11 +241,7 @@ function textToPNG(text, width = 600, height = 500, font = 'bold 36px Arial', co
   return canvas.toDataURL('image/png');
 }
 
-// 🔧 ATTENDRE QUE LE DOM SOIT PRÊT
 window.addEventListener('DOMContentLoaded', () => {
-  console.log("✅ DOM prêt, initialisation...");
-  
-  // Conversion texte → PNG
   const cards = document.querySelectorAll('.card-1, .card-2, .card-3, .card-4, .card-5, .card-6, .card-7, .card-8, .card-9, .card-10, .card-11, .card-12, .card-13, .card-14, .card-15');
 
   cards.forEach(card => {
@@ -297,30 +271,9 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     }
   });
-
-  // 🔧 BOUTONS : Maintenant qu'ils existent !
-  const nextBtn = document.querySelector(".next");
-  const prevBtn = document.querySelector(".prev");
-
-  if (nextBtn) {
-    nextBtn.addEventListener("click", () => {
-      scrubTo(scrub.vars.totalTime + spacing);
-      manualInteraction();
-    });
-    console.log("✅ Bouton Next connecté");
-  }
-
-  if (prevBtn) {
-    prevBtn.addEventListener("click", () => {
-      scrubTo(scrub.vars.totalTime - spacing);
-      manualInteraction();
-    });
-    console.log("✅ Bouton Prev connecté");
-  }
-
-  // Lancement initial
-  scheduleAutoScroll(10000);
-  console.log("🚀 Animation démarrée");
 });
 
 setInterval(updateActiveCard, 100);
+
+// Lancement initial
+scheduleAutoScroll(3000);

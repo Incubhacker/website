@@ -1,0 +1,140 @@
+/* ============================
+   STYLES GALERIE - COMPATIBLE AVEC TES DESIGNS
+============================ */
+
+/* 🎴 CONTENEUR GALERIE : inchangé */
+.gallery {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 🎯 CARTES : structure de base pour tes designs */
+.cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 🃏 WRAPPER : compatible avec tes card-X.css */
+.card-wrapper {
+  position: absolute;
+  width: 60vw;
+  height: 70vh;
+  max-width: 800px;
+  max-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 🎨 CARTE DE BASE : styles minimum pour tes designs */
+.card {
+  width: 100%;
+  height: 100%;
+  border-radius: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  color: white;
+  font-family: Mori, sans-serif;
+  padding: 2rem;
+  box-sizing: border-box;
+  
+  /* 🔥 IMPORTANT : tes variables CSS sont préservées */
+  --card-text-color: white;
+  --card-font-header-family: Mori, sans-serif;
+  --card-font-footer-family: Mori, sans-serif;
+  --header-position: 2rem;
+  --footer-position: 2rem;
+  --header-font-size: 1.5rem;
+  --footer-font-size: 1rem;
+}
+
+/* 🎭 STRUCTURES POUR TES DESIGNS */
+.card-header {
+  position: absolute;
+  top: var(--header-position, 2rem);
+  left: var(--header-position, 2rem);
+  font-family: var(--card-font-header-family, Mori, sans-serif);
+  font-size: var(--header-font-size, 1.5rem);
+  color: var(--card-text-color, white);
+  z-index: 10;
+}
+
+.card-footer {
+  position: absolute;
+  bottom: var(--footer-position, 2rem);
+  left: var(--footer-position, 2rem);
+  font-family: var(--card-font-footer-family, Mori, sans-serif);
+  font-size: var(--footer-font-size, 1rem);
+  color: var(--card-text-color, white);
+  z-index: 10;
+}
+
+.back-side {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+.left-side,
+.right-side {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 🎯 RESPONSIVE */
+@media (max-width: 768px) {
+  .card-wrapper {
+    width: 90vw;
+    height: 60vh;
+  }
+  
+  .card {
+    padding: 1rem;
+  }
+  
+  .card-header,
+  .card-footer {
+    font-size: 0.9rem;
+  }
+}
+.card-wrapper {
+  cursor: default;
+  transition: cursor 0.3s ease;
+}
+
+.card-wrapper:hover {
+  cursor: grab;
+}
+
+.card-wrapper:active {
+  cursor: grabbing;
+}
+
+/* 🎮 ZONE GALERIE */
+.gallery-section {
+  position: relative;
+}
+
+.gallery-section.user-controlling {
+  cursor: grabbing;
+}
