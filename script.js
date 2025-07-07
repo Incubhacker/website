@@ -15,50 +15,41 @@ const spacing = 0.1,
     duration: 1.5,
     ease: "power3",
     paused: true
-  }),
-  trigger = ScrollTrigger.create({
-    start: 0,
-    onUpdate(self) {
-      if (self.progress === 1 && self.direction > 0 && !self.wrapping) {
-        wrapForward(self);
-      } else if (self.progress < 1e-5 && self.direction < 0 && !self.wrapping) {
-        wrapBackward(self);
-      } else {
-        scrub.vars.totalTime = snap((iteration + self.progress) * seamlessLoop.duration());
-        scrub.invalidate().restart();
-        self.wrapping = false;
-      }
-    },
-    end: "+=3000",
-    pin: ".main-flexbox"
   });
 
-function wrapForward(trigger) {
-  iteration++;
-  trigger.wrapping = true;
-  trigger.scroll(trigger.start + 1);
-}
-
-function wrapBackward(trigger) {
-  iteration--;
-  if (iteration < 0) {
-    iteration = 9;
-    seamlessLoop.totalTime(seamlessLoop.totalTime() + seamlessLoop.duration() * 10);
-    scrub.pause();
-  }
-  trigger.wrapping = true;
-  trigger.scroll(trigger.end - 1);
-}
-
+// 🎯 RESTAURER LA LOGIQUE ORIGINALE DE SCRUBTO
 function scrubTo(totalTime) {
   let progress = (totalTime - seamlessLoop.duration() * iteration) / seamlessLoop.duration();
   if (progress > 1) {
-    wrapForward(trigger);
+    wrapForward();
   } else if (progress < 0) {
-    wrapBackward(trigger);
+    wrapBackward();
   } else {
-    trigger.scroll(trigger.start + progress * (trigger.end - trigger.start));
+    // 🎯 ADAPTATION: Au lieu de trigger.scroll, on contrôle directement scrub
+    scrub.vars.totalTime = snap(totalTime);
+    scrub.invalidate().restart();
   }
+}
+
+// 🎯 RESTAURER LES FONCTIONS DE WRAP ORIGINALES
+function wrapForward() {
+  iteration++;
+  // 🎯 ADAPTATION: Simuler le comportement du trigger
+  let newTime = snap(iteration * seamlessLoop.duration() + 0.01);
+  scrub.vars.totalTime = newTime;
+  scrub.invalidate().restart();
+}
+
+function wrapBackward() {
+  iteration--;
+  if (iteration < 0) {
+    iteration = cards.length - 1;
+    seamlessLoop.totalTime(seamlessLoop.totalTime() + seamlessLoop.duration() * 10);
+  }
+  // 🎯 ADAPTATION: Simuler le comportement du trigger
+  let newTime = snap(iteration * seamlessLoop.duration() + seamlessLoop.duration() - 0.01);
+  scrub.vars.totalTime = newTime;
+  scrub.invalidate().restart();
 }
 
 // Événements boutons
@@ -80,7 +71,7 @@ if (prevBtn) {
   });
 }
 
-// Événements molette
+// Événements molette sur la flexbox SEULEMENT si survol carte active
 if (flexbox) {
   flexbox.addEventListener("wheel", (e) => {
     if (isOverActiveCard) {
@@ -94,7 +85,7 @@ if (flexbox) {
     }
   });
 
-  // Clavier
+  // Clavier sur la flexbox
   flexbox.addEventListener("keydown", (e) => {
     if (e.key === "ArrowRight") {
       e.preventDefault();
@@ -107,6 +98,7 @@ if (flexbox) {
     }
   });
 
+  // Rendre la flexbox focusable
   flexbox.setAttribute("tabindex", "0");
 }
 
@@ -126,35 +118,27 @@ function buildSeamlessLoop(items, spacing) {
     time = 0,
     i, index, item;
 
-  // 🎯 CORRECTION: Préserver les ratios CSS en utilisant transform au lieu de styles directs
-  gsap.set(items, { 
-    xPercent: 400, 
-    opacity: 0, 
-    //scale: 0,
-    force3D: true // Force l'accélération hardware sans affecter les dimensions
-  });
+  gsap.set(items, { xPercent: 400, opacity: 0, scale: 0 });
 
   for (i = 0; i < l; i++) {
     index = i % items.length;
     item = items[index];
     time = i * spacing;
-    rawSequence.fromTo(item, { opacity: 0 }, {
-      //scale: 1,
+    rawSequence.fromTo(item, { scale: 0, opacity: 0 }, {
+      scale: 1,
       opacity: 1,
       zIndex: 100,
       duration: 0.5,
       yoyo: true,
       repeat: 1,
       ease: "power1.in",
-      immediateRender: false,
-      //force3D: true // 🎯 CORRECTION: Préserver les ratios
+      immediateRender: false
     }, time)
     .fromTo(item, { xPercent: 400 }, {
       xPercent: -400,
       duration: 1,
       ease: "none",
-      immediateRender: false,
-      //force3D: true // 🎯 CORRECTION: Préserver les ratios
+      immediateRender: false
     }, time);
     i <= items.length && seamlessLoop.add("label" + i, time);
   }
@@ -203,19 +187,15 @@ let lastActiveCard = null;
 
 function pauseScrollAuto() {
   isHovered = true;
-  isOverActiveCard = true;
   pauseAutoScroll();
 }
 
 function resumeScrollAutoWithDelay() {
   isHovered = false;
-  isOverActiveCard = false;
   scheduleAutoScroll(3000);
 }
 
 function updateActiveCard() {
-  if (cards.length === 0) return;
-  
   let active = cards.reduce((maxEl, el) => {
     return (parseFloat(gsap.getProperty(el, "opacity")) || 0) >
            (parseFloat(gsap.getProperty(maxEl, "opacity")) || 0)
@@ -227,11 +207,18 @@ function updateActiveCard() {
       lastActiveCard.classList.remove("active");
       lastActiveCard.removeEventListener("mouseenter", pauseScrollAuto);
       lastActiveCard.removeEventListener("mouseleave", resumeScrollAutoWithDelay);
+      lastActiveCard.removeEventListener("mouseenter", () => { isOverActiveCard = true; });
+      lastActiveCard.removeEventListener("mouseleave", () => { isOverActiveCard = false; });
     }
 
     active.classList.add("active");
     active.addEventListener("mouseenter", pauseScrollAuto);
     active.addEventListener("mouseleave", resumeScrollAutoWithDelay);
+    
+    // 🎯 NOUVEAU: Gérer isOverActiveCard
+    active.addEventListener("mouseenter", () => { isOverActiveCard = true; });
+    active.addEventListener("mouseleave", () => { isOverActiveCard = false; });
+    
     lastActiveCard = active;
   }
 }
@@ -301,10 +288,8 @@ window.addEventListener('DOMContentLoaded', () => {
       if (texteOriginal) {
         const img = document.createElement('img');
         img.src = textToPNG(texteOriginal, 600, 500, 'bold 36px Arial', 'white', 'center');
-        // 🎯 CORRECTION: Préserver les ratios CSS des images
         img.style.width = '100%';
-        img.style.height = '100%';
-        img.style.objectFit = 'contain'; // Préserve les ratios
+        img.style.height = 'auto';
         leftSide.innerHTML = '';
         leftSide.appendChild(img);
       }
@@ -316,10 +301,8 @@ window.addEventListener('DOMContentLoaded', () => {
       if (texteOriginal) {
         const img = document.createElement('img');
         img.src = textToPNG(texteOriginal, 600, 500, 'bold 36px Arial', 'white', 'center');
-        // 🎯 CORRECTION: Préserver les ratios CSS des images
         img.style.width = '100%';
-        img.style.height = '100%';
-        img.style.objectFit = 'contain'; // Préserve les ratios
+        img.style.height = 'auto';
         rightSide.innerHTML = '';
         rightSide.appendChild(img);
       }
