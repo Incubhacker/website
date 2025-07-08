@@ -1,11 +1,10 @@
 /* --- CARD 1--- */
 /* Conteneur principal de la carte */
 .card-1 {
-  background-color: #000000;       /* Fond noir */
   font-weight: bold;
   font-size: 5vw;                  /* Taille relative au viewport */
   border-radius: 1.2rem;           /* Coins arrondis */
-  overflow: visible;               /* Permet aux éléments hors flux d’être visibles */
+  overflow: visible;               /* Permet aux éléments hors flux d'être visibles */
   position: relative;              /* Pour positionnement des enfants absolus */
   display: flex;
   flex-direction: column;
@@ -53,7 +52,7 @@
 }
 
 /* --- BACK SIDE FLEX LAYOUT --- */
-/* Conteneur flexible principal pour l’arrière de la carte */
+/* Conteneur flexible principal pour l'arrière de la carte */
 .card-1 .back-side {
   aspect-ratio: 16 / 9;           /* Ratio paysage */
   border: 3px solid white;        /* Bordure blanche */
@@ -67,7 +66,8 @@
   box-sizing: border-box;
   z-index: 1;
 
-  background: none;               /* Pas de background direct ici, utilisé dans ::before */
+  /* AJOUT DU FOND NOIR DE BASE */
+  background-color: black;        /* Fond noir permanent */
   mask-image: none;              /* Pas de masque direct ici */
   -webkit-mask-image: none;
 }
@@ -78,11 +78,11 @@
   position: absolute;
   inset: 0;                      /* top/right/bottom/left = 0 */
   border-radius: 1rem;
-  background: black url("./assets/convivialité.jpg") no-repeat left top;
+  background: url("./assets/convivialité.jpg") no-repeat left top;
   background-size: contain;
   background-attachment: fixed;
 
-  /* Masque dégradé : opaque jusqu’à 50%, puis fondu vers transparent à 60% */
+  /* Masque dégradé : opaque jusqu'à 50%, puis fondu vers transparent à 60% */
   mask-image: linear-gradient(to right, black 50%, transparent 60%);
   -webkit-mask-image: linear-gradient(to right, black 50%, transparent 60%);
 
@@ -95,6 +95,7 @@
   .card-1 .back-side {
     aspect-ratio: 9 / 16;
     flex-direction: column;      /* Passage en colonne */
+    /* Le background-color: black reste actif */
   }
 
   .card-1 .back-side::before {
@@ -151,7 +152,7 @@
   object-fit: contain;
   user-select: none;
 
-  /* Assure qu’aucun masque n’interfère avec l’image */
+  /* Assure qu'aucun masque n'interfère avec l'image */
   -webkit-mask-image: none !important;
   mask-image: none !important;
 }

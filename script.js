@@ -19,13 +19,18 @@ const spacing = 0.1,
 
 // 🎯 RESTAURER LA LOGIQUE ORIGINALE DE SCRUBTO
 function scrubTo(totalTime) {
+  console.log("scrubTo appelé avec:", totalTime);
   let progress = (totalTime - seamlessLoop.duration() * iteration) / seamlessLoop.duration();
+  console.log("Progress calculé:", progress, "iteration:", iteration);
+  
   if (progress > 1) {
+    console.log("🔄 WRAP FORWARD");
     wrapForward();
   } else if (progress < 0) {
+    console.log("🔄 WRAP BACKWARD");
     wrapBackward();
   } else {
-    // 🎯 ADAPTATION: Au lieu de trigger.scroll, on contrôle directement scrub
+    console.log("➡️ SCRUB NORMAL");
     scrub.vars.totalTime = snap(totalTime);
     scrub.invalidate().restart();
   }
@@ -43,7 +48,7 @@ function wrapForward() {
 function wrapBackward() {
   iteration--;
   if (iteration < 0) {
-    iteration = cards.length - 1;
+    iteration = 9;
     seamlessLoop.totalTime(seamlessLoop.totalTime() + seamlessLoop.duration() * 10);
   }
   // 🎯 ADAPTATION: Simuler le comportement du trigger
@@ -314,3 +319,9 @@ setInterval(updateActiveCard, 100);
 
 // Lancement initial
 scheduleAutoScroll(3000);
+
+
+
+
+
+
