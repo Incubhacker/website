@@ -34,27 +34,19 @@ body {
    HEADER ET FOOTER FLEXBOX
 ============================ */
 .flexbox-header {
-  background: linear-gradient(135deg, #2c3e50, #3498db);
+  background: red;
+  background-image: url("./assets/gamefunkel.png");
+  background-repeat: no-repeat;        /* 👈 MANQUAIT */
+  background-position: center center;  /* 👈 MANQUAIT */
+  background-size: cover;
   color: white;
   padding: 1.5rem 2rem;
   text-align: center;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-  border-radius: 15px 15px 0 0;
   position: relative;
   overflow: hidden;
-  flex-shrink: 0;
+  flex-shrink: 0;  
 }
 
-.flexbox-header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  animation: shimmer 3s infinite;
-}
 
 @keyframes shimmer {
   0% { left: -100%; }
@@ -66,7 +58,6 @@ body {
   margin: 0 0 0.5rem 0;
   font-size: clamp(1.5rem, 4vw, 2.5rem);
   font-weight: 700;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
   font-family: var(--card-font-header-family);
 }
 
@@ -78,34 +69,21 @@ body {
 }
 
 .flexbox-footer {
-  background: linear-gradient(135deg, #2c3e50, #34495e);
+  background: transparent;
   color: white;
   padding: 1rem 2rem;
   text-align: center;
-  box-shadow: 0 -4px 15px rgba(0,0,0,0.3);
-  border-radius: 0 0 15px 15px;
   font-family: var(--card-font-footer-family);
   font-size: clamp(1rem, 2.5vw, 1.3rem);
   font-weight: 600;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
   flex-shrink: 0;
   position: relative;
+  height: 50vh;  /* Hauteur fixe */
+  /* ou */
+  min-height: 100px;  /* Hauteur minimale */
 }
 
-.flexbox-footer::after {
-  content: '✨';
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 1.5rem;
-  animation: sparkle 2s ease-in-out infinite;
-}
 
-@keyframes sparkle {
-  0%, 100% { opacity: 0.5; transform: translateY(-50%) scale(1); }
-  50% { opacity: 1; transform: translateY(-50%) scale(1.2); }
-}
 
 /* ============================
    MAIN FLEXBOX
@@ -114,22 +92,27 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+  background: transparent;
   border-radius: 20px;
   margin: 1rem;
-  box-shadow: 0 0 30px rgba(87, 168, 24, 0.3);
   overflow: hidden;
 }
 
 .BackgroundIncub {
-  background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  background-image: url("./assets/logo%20oeuf%20bgV2.svg");
+  background-repeat: no-repeat;
+  background-position: 100% 50%;
+  background-size: auto;
+  background-attachment: fixed;
+  z-index: -1; /* 🔥 IMPORTANT : bien en arrière-plan */
 }
+
 
 /* ============================
    LAYOUT DES CARTES - RATIOS CORRIGÉS
