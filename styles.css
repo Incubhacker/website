@@ -1,3 +1,23 @@
+/* ============================
+   POLICES ET RÉGLAGES GÉNÉRAUX
+============================ */
+:root {
+  --header-position: 101%;
+  --footer-position: 102%;
+  --header-font-size: clamp(2rem, 5%, 2rem);
+  --footer-font-size: clamp(2rem, 5%, 3rem);
+  --card-text-color: white;
+  --card-font-footer-family: Seeds, sans-serif;
+  --card-font-header-family: Arial,"sans-serif";
+}
+
+@font-face {
+  font-family: 'Seeds';
+  src: url('./assets/SEEDS.TTF') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -6,14 +26,76 @@ body {
   font-family: Mori, sans-serif;
   background: #111;
   min-height: 100vh;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
-.gallery {
-  position: absolute;
-  width: 100%;
-  height: 100vh;
+/* ============================
+   HEADER ET FOOTER FLEXBOX
+============================ */
+.flexbox-header {
+  
+  background-image: url("./assets/incub.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  color: white;
+  text-align: center;
+  position: relative;
+  overflow: visible;
+  flex-shrink: 0;  
+  height: 8EM;
+}
+
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: -100%; }
+}
+
+.flexbox-header h1 {
+  margin: 0 0 0.5rem 0;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 700;
+  font-family: var(--card-font-header-family);
+}
+
+.flexbox-header p {
+  margin: 0;
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
+  opacity: 0.9;
+  font-weight: 400;
+}
+
+
+.flexbox-footer {
+  background: transparent;
+  color: white;
+  padding: 1rem 2rem;
+  text-align: center;
+  font-family: var(--card-font-footer-family);
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  font-weight: 600;
+  flex-shrink: 0;
+  position: relative;
+  height: 50vh;  /* Hauteur fixe */
+  /* ou */
+  min-height: 100px;  /* Hauteur minimale */
+}
+
+
+
+/* ============================
+   MAIN FLEXBOX
+============================ */
+.main-flexbox {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: transparent;
+  border-radius: 20px;
+  margin: 1rem;
   overflow: hidden;
 }
 
@@ -24,88 +106,150 @@ body {
   width: 100vw;
   height: 100vh;
   background-color: black;
-  background-image: url("/assets/logo oeuf bgV2.svg"); opacity: 0.1 ;
-  background-repeat:no-repeat;
-  background-position : 100% 50%;
-  background-size:auto;
-  background-attachment:fixed;
-  z-index: -1;
+  background-image: url("./assets/logo%20oeuf%20bgV2.svg"), url("./assets/pcb.png");
+  background-repeat: no-repeat, no-repeat;
+  background-position: 100% 50%, 50% -20%;
+  background-size: auto, 120%;
+  background-attachment: fixed, local;
+  z-index: -1; /* 🔥 IMPORTANT : bien en arrière-plan */
 }
 
-.cards {
-  position: absolute;
-  width: 80%;                   /* Par défaut : carte large */
-  aspect-ratio: 16 / 9;          /* Paysage */
-  max-width: 60rem;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -55%);
-}
-@media (max-aspect-ratio: 1/1) {
-  .cards {
-    aspect-ratio: 9 / 16;
 
-    width: 60vw;              /* Largeur relative */
-    max-height: 80vh;         /* Ne dépasse jamais la hauteur écran */
-    max-width: calc(80vh * 9 / 16); /* Respecte le ratio */
-    min-width: 200px;
-  }
-}
-
-.cards li {
-  width: 100%;
-  height: 100%;
+/* ============================
+   LAYOUT DES CARTES - RATIOS CORRIGÉS
+============================ */
+.gallery {
+  position: relative;
+  flex-grow: 1;
+  /*padding: 2rem;*/
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 5vw; /* responsive */
-  background-color: #9d7cce;
+  /*min-height: 400px;*/
+}
+
+.cards {
+  position: relative;
+  list-style: none;
+  padding: 0;
+  margin: 6rem 0 2rem 0;              /* 👈 haut, droite, bas, gauche */
+  z-index: 10;
+  
+  /* Utilisation de min() pour un dimensionnement plus fluide */
+  width: min(80vw, calc(60vh * 16/9));
+  height: min(60vh, calc(80vw * 9/16));
+  aspect-ratio: 16 / 9;
+  
+  /* Tailles minimales et maximales */
+  min-width: 300px;
+  min-height: 169px;
+  max-width: 90vw;
+  max-height: 70vh;
+}
+
+/* Mode portrait : RATIO 9/16 STRICT */
+@media (max-aspect-ratio: 1/1) {
+  .cards {
+    width: min(70vw, calc(50vh * 9/16));
+    height: min(50vh, calc(70vw * 16/9));
+    aspect-ratio: 9 / 16;
+    
+    min-width: 200px;
+    min-height: 356px;
+    max-width: 80vw;
+    max-height: 60vh;
+  }
+}
+
+/* Media queries pour très petits écrans */
+@media (max-width: 480px) {
+  .gallery {
+    padding: 1rem;
+    min-height: 300px;
+  }
+  
+  .cards {
+    min-width: 250px;
+    min-height: 140px;
+  }
+}
+
+/* Media queries pour très grands écrans */
+@media (min-width: 1400px) {
+  .cards {
+    max-width: 800px;
+    max-height: 450px;
+  }
+}
+
+/* Media queries pour écrans très larges */
+@media (min-aspect-ratio: 21/9) {
+  .cards {
+    width: min(50vw, calc(70vh * 16/9));
+    height: min(70vh, calc(50vw * 9/16));
+  }
+}
+
+.card-wrapper {
   position: absolute;
+  width: 100%;
+  height: 100%;
   top: 0;
   left: 0;
-  border-radius: 1.2rem;
-  color: white;
-  font-weight: bold;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  z-index: 10;
+  container-type: inline-size;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 
-
-
+/* ========================
+   ACTIONS / BOUTONS
+======================== */
 .actions {
-  position: absolute;
-  bottom: 25px;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  flex-wrap: nowrap;
+  pointer-events: auto;
+  justify-content: center;
+  padding: 1rem;
+  flex-shrink: 0;
+  border-radius: 10px;
+  margin: 0.5rem;
 }
 
 button {
   display: inline-block;
+  white-space: nowrap;
   outline: none;
   border: none;
   padding: 12px 25px;
   background: #414141;
   background-image: linear-gradient(to bottom, #575757, #414141);
-  text-shadow: 0px 1px 0px #414141;
-  box-shadow: 0px 1px 0px #414141;
   color: #ffffff;
-  text-decoration: none;
-  font-family: Mori;
+  font-family: Mori, sans-serif;
   font-weight: 600;
   text-transform: uppercase;
-  cursor: pointer;
   font-size: 20px;
   line-height: 18px;
-  border-radius: 4px;
-  margin: 0 auto 10px;
+  border-radius: 8px;
+  margin: 0;
+  cursor: pointer;
+  text-shadow: 0px 1px 0px #414141;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
 }
 
 button:hover {
   background: #57a818;
   background-image: linear-gradient(to bottom, #57a818, #4d9916);
   text-shadow: 0px 1px 0px #32610e;
-  box-shadow: 0px 1px 0px #fefefe;
+  box-shadow: 0px 6px 12px rgba(0,0,0,0.4);
   color: #ffffff;
+  transform: translateY(-2px);
 }
 
 a {
@@ -115,4 +259,30 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  color: #eee;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0rem;
+  padding: 0rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.text-shadow {
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+}
+
+.generated-text-img[src=""],
+.generated-text-img:not([src]) {
+  display: none !important;
 }
