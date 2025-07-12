@@ -36,9 +36,9 @@ body {
 .flexbox-header {
   
   background-image: url("./assets/incub.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: contain;
+  background-repeat: no-repeat ;
+  background-position: center center ;
+  background-size: contain ;
   color: white;
   text-align: center;
   position: relative;
@@ -47,25 +47,37 @@ body {
   height: 8EM;
 }
 
+.flexbox-header::before {
+  content: '';
+  top: -41%;                                             /* 👈 AJOUTER */
+  left: 0;  
+  position: absolute;                                           /* 👈 Position précise */
+  width: 100%;                                        /* 👈 Largeur du parent seulement */
+  height: 200%;                                       /* 👈 Déborde vers le bas */
+  background-image: url("./assets/pcb.png");
+  background-repeat: repeat-x;
+  background-position: center center;                       /* 👈 Centré */
+  background-size: CONTAIN;                         /* 👈 Taille relative à la hauteur */
+  z-index: -1;
+  
+   /* 👈 FONDU HORIZONTAL */
+   mask: linear-gradient(to right, 
+   transparent 10%,                                   /* 👈 Transparent à gauche */
+   black 25%,                                        /* 👈 Opaque au centre */
+   black 75%,                                        /* 👈 Opaque au centre */
+   transparent 90%                                  /* 👈 Transparent à droite */
+ );
+ -webkit-mask: linear-gradient(to right, 
+   transparent 10%, black 25%, black 75%, transparent 90%
+ );
+}
+
+
 
 @keyframes shimmer {
   0% { left: -100%; }
   50% { left: 100%; }
   100% { left: -100%; }
-}
-
-.flexbox-header h1 {
-  margin: 0 0 0.5rem 0;
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
-  font-weight: 700;
-  font-family: var(--card-font-header-family);
-}
-
-.flexbox-header p {
-  margin: 0;
-  font-size: clamp(0.9rem, 2vw, 1.2rem);
-  opacity: 0.9;
-  font-weight: 400;
 }
 
 
@@ -96,7 +108,7 @@ body {
   background: transparent;
   border-radius: 20px;
   margin: 1rem;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .BackgroundIncub {
@@ -106,11 +118,11 @@ body {
   width: 100vw;
   height: 100vh;
   background-color: black;
-  background-image: url("./assets/logo%20oeuf%20bgV2.svg"), url("./assets/pcb.png");
-  background-repeat: no-repeat, no-repeat;
-  background-position: 100% 50%, 50% -20%;
-  background-size: auto, 120%;
-  background-attachment: fixed, local;
+  background-image: url("./assets/logo%20oeuf%20bgV2.svg");
+  background-repeat: no-repeat;
+  background-position: 100% 50%;
+  background-size: auto;
+  background-attachment: fixed;
   z-index: -1; /* 🔥 IMPORTANT : bien en arrière-plan */
 }
 
