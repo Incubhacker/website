@@ -559,6 +559,8 @@ blockquote {
   font-weight: 500;
 }
 
+
+
 /* Responsive */
 @media (max-width: 768px) {
   .text-content {
