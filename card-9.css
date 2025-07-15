@@ -1,0 +1,158 @@
+/* --- CARD 9--- */
+/* Conteneur principal de la carte */
+.card-9 {
+  font-weight: bold;
+  font-size: 5vw;                  /* Taille relative au viewport */
+  border-radius: 1.2rem;           /* Coins arrondis */
+  overflow: visible;               /* Permet aux éléments hors flux d'être visibles */
+  position: relative;              /* Pour positionnement des enfants absolus */
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;          /* Inclut padding et bordures dans la taille */
+}
+
+/* Pseudo-élément décoratif sous la carte (vide ici, peut servir pour effets futurs) */
+.card-9::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  border-radius: 1.2rem;
+  z-index: 0;
+}
+
+/* En-tête de la carte */
+.card-9 .card-header {
+  font-family: var(--card-font-header-family);
+  position: absolute;
+  bottom: var(--header-position);
+  left: 0;
+  width: 100%;
+  background-color: transparent;
+  color: var(--card-text-color);
+  font-size: var(--header-font-size);
+  text-align: start;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Pied de page de la carte */
+.card-9 .card-footer {
+  font-family: var(--card-font-footer-family);
+  position: absolute;
+  top: var(--footer-position);
+  left: 0;
+  width: 100%;
+  background-color: transparent;
+  color: var(--card-text-color);
+  font-size: var(--footer-font-size);
+  text-align: end;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* --- BACK SIDE FLEX LAYOUT --- */
+/* Conteneur flexible principal pour l'arrière de la carte */
+.card-9 .back-side {
+  aspect-ratio: 16 / 9;           /* Ratio paysage */
+  border: 3px solid white;        /* Bordure blanche */
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;               /* Masque tout débordement */
+  box-sizing: border-box;
+  z-index: 1;
+
+  /* AJOUT DU FOND NOIR DE BASE */
+  background-color: black;        /* Fond noir permanent */
+  mask-image: none;              /* Pas de masque direct ici */
+  -webkit-mask-image: none;
+}
+
+/* Pseudo-élément pour le fond avec image + dégradé (appliqué uniquement à back-side) */
+.card-9 .back-side::before {
+  content: "";
+  position: absolute;
+  inset: 0;                      /* top/right/bottom/left = 0 */
+  border-radius: 1rem;
+  background: url("./assets/convivialité.jpg") no-repeat left top;
+  background-size: contain;
+  background-attachment: fixed;
+
+  /* Masque dégradé : opaque jusqu'à 50%, puis fondu vers transparent à 60% */
+  mask-image: linear-gradient(to right, black 50%, transparent 60%);
+  -webkit-mask-image: linear-gradient(to right, black 50%, transparent 60%);
+
+  z-index: 0;
+  pointer-events: none;          /* Ne bloque pas les interactions */
+}
+
+/* --- Responsive portrait (ratio <= 1) --- */
+@media (max-aspect-ratio: 1/1) {
+  .card-9 .back-side {
+    aspect-ratio: 9 / 16;
+    flex-direction: column;      /* Passage en colonne */
+    /* Le background-color: black reste actif */
+  }
+
+  .card-9 .back-side::before {
+    background-position: left top;
+    background-size: auto 50%;  /* Hauteur 50%, largeur auto */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    mask-image: none;           /* Pas de masque dégradé en portrait */
+    -webkit-mask-image: none;
+  }
+}
+
+/* Enfants flexibles : gauche et droite */
+.card-9 .back-side .left-side,
+.card-9 .back-side .right-side {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+/* Zone gauche : contenu avec z-index au-dessus du fond */
+.card-9 .back-side .left-side {
+  z-index: 2;
+}
+
+/* Zone droite : logo en fond */
+.card-9 .back-side .right-side {
+  background: url("./assets/logo%20oeuf%20bgV2.svg") no-repeat 100% 50%;
+  background-size: contain;
+  background-attachment: fixed;
+  z-index: 2;
+}
+
+/* Texte PNG généré – superposé et au-dessus de tout */
+.card-9 .overlay-text {
+  position: absolute;
+  inset: 0;
+  z-index: 1001;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-9 .overlay-text img.generated-text-img {
+  width: 90%;
+  height: auto;
+  object-fit: contain;
+  user-select: none;
+
+  /* Assure qu'aucun masque n'interfère avec l'image */
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
