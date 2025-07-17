@@ -367,7 +367,7 @@ html, body {
    CONTENU TEXTE PAGE 2 - MODE SOMBRE
 ======================== */
 .text-content {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 2rem;
   flex-grow: 1;
@@ -489,7 +489,7 @@ blockquote {
 ======================== */
 .partners-section {
   padding: 2rem;
-  text-align: center;
+  text-align: left;
 }
 
 .partners-section h2 {
@@ -501,7 +501,7 @@ blockquote {
 .partners-section p {
   color: #ddd;
   margin-bottom: 2rem;
-  max-width: 800px;
+  max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -680,6 +680,16 @@ blockquote {
   color: #c3f79d;
 }
 
+.contact-info img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto;
+}
+
 /* ========================
    IMAGES STOCK
 ======================== */
@@ -704,6 +714,7 @@ blockquote {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
   margin: 2rem 0;
+
 }
 
 .image-item {
@@ -730,7 +741,7 @@ blockquote {
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  background: linear-gradient(transparent, rgba(0, 0, 0, 1));
   color: #c3f79d;
   padding: 1rem;
   font-size: 0.9rem;
