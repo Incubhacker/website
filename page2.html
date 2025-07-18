@@ -1,183 +1,118 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <title>Incubhacker - À propos</title>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Progressive</title>
+    <link rel="stylesheet" href="styles2.css">
 </head>
 <body>
-  
-  <div class="BackgroundIncub"></div>
-  <div class="main-flexbox">
+
+    <nav>
+
+        <ul>
+        <li><a href="#intro">Intro</a></li>
+            <li>
+                <a href="#first">First section</a>
+                <ul>
+                    <li>
+              <a href="#second">Second section</a>
+              <ul>
+                <li>
+                  <a href="#third">Third section</a>
+                </li>
+              </ul>
+            </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#fourth">Fourth section</a>
+          <ul>
+            <li><a href="#fifth">Fifth section</a></li>
+            <li><a href="#sixth">Sixth section</a></li>
+          </ul>
+            </li>
+        <li><a href="#seventh">Seventh section</a></li>
+        <li><a href="#eighth">Eighth section</a></li>
+        </ul>
+      
+      <svg xmlns="http://www.w3.org/2000/svg">
+        <path />
+      </svg>
+      
+    </nav>
     
-    <!-- HEADER -->
-    <div class="flexbox-header"></div>
-    
-    <!-- CONTENU TEXTE -->
-    <div class="text-content">
-      <article class="main-article">
-        <header class="article-header">
-          <h1>Incubhacker,<br>le Hackerspace de Namur</h1>
-          <p class="subtitle">Atelier collaboratif “do it yourself”</p>
-        </header>
+    <article id="top">
+      
+      <div class="subheading">An intersectionObserver approach to</div>
+      <h1>Hakim's Progress Nav Concept</h1>
+      
+      <section id="intro">
+        <h2>Intro</h2>
+        <p>Hakim el Hattab published a <a href="https://codepen.io/hakimel/pen/BpKNPg">Progress Nav concept</a> on Codepen back in 2017. As pointed out by Chris in <a href="https://css-tricks.com/table-of-contents-with-intersectionobserver/">a recent blog post</a> over at CSS Tricks, we now have the Intersection Observer API which saves us a good amount of hassle. Here's my attempt at an <code>intersectionObserver</code> version of Hakim's amazing nav concept.</p>
+      </section>
+      
+      <section id="first">
+        <h2>First section</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi nisl, pharetra et odio non, sollicitudin bibendum enim. Integer posuere, est et posuere feugiat, nisi nunc auctor nisi, eu tristique ipsum justo ut tellus. Phasellus molestie ultricies sodales. Nunc nec ligula placerat, vehicula orci a, tincidunt ante. Donec ac metus quis nunc cursus tincidunt.</p>
+      <p>Vivamus sed ullamcorper ex. Suspendisse potenti. Nam sodales hendrerit enim, non fringilla mauris gravida maximus. Sed pharetra purus eget quam auctor luctus. Aenean arcu nulla, aliquam ut consectetur non, tincidunt eget sem. Aliquam tristique mattis urna, a posuere justo dapibus nec. Aenean non lacinia nisl. Aenean ac bibendum eros. Integer posuere enim tempor auctor venenatis. Etiam convallis nunc at eros ultrices, et elementum erat ultrices.</p>
+      </section>
+      
+      <section id="second">
+        <h2>Second section</h2>
+        <p>Phasellus congue felis quis arcu dignissim, pulvinar mollis ante pretium. Sed ac auctor quam. Mauris ac tellus et quam porta mattis quis quis quam. Sed tristique gravida mauris, eget eleifend nunc accumsan in.</p>
+        <p>Donec consequat fringilla diam, sit amet aliquam magna faucibus vel. Sed sagittis id nisi et facilisis. Aliquam erat volutpat. Mauris arcu nunc, euismod at enim at, porttitor laoreet lorem. In molestie dui at augue aliquet, in tincidunt nisi dictum. Donec sagittis enim vestibulum est elementum, vel lobortis libero suscipit.</p>
+      <p>Vivamus sed ullamcorper ex. Suspendisse potenti. Nam sodales hendrerit enim, non fringilla mauris gravida maximus. Sed pharetra purus eget quam auctor luctus. Aenean arcu nulla, aliquam ut consectetur non, tincidunt eget sem. Aliquam tristique mattis urna, a posuere justo dapibus nec. Aenean non lacinia nisl. Aenean ac bibendum eros. Integer posuere enim tempor auctor venenatis. Etiam convallis nunc at eros ultrices, et elementum erat ultrices.</p>
+      </section>
+      
+      <section id="third">
+        <h2>Third section</h2>
+        <p>Etiam id ex dolor. Curabitur quis tellus vitae neque finibus suscipit. Donec vel nisl ac justo mattis molestie. Vivamus in interdum est. Fusce sed malesuada tellus. Suspendisse imperdiet condimentum sem in tristique. Donec faucibus dui non pharetra cursus. Praesent congue turpis leo, vitae porttitor elit fringilla vel. Phasellus ut aliquet augue. Donec egestas luctus placerat.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi nisl, pharetra et odio non, sollicitudin bibendum enim. Integer posuere, est et posuere feugiat, nisi nunc auctor nisi, eu tristique ipsum justo ut tellus. Phasellus molestie ultricies sodales. Nunc nec ligula placerat, vehicula orci a, tincidunt ante. Donec ac metus quis nunc cursus tincidunt.</p>
+      <p>Vivamus sed ullamcorper ex. Suspendisse potenti. Nam sodales hendrerit enim, non fringilla mauris gravida maximus. Sed pharetra purus eget quam auctor luctus. Aenean arcu nulla, aliquam ut consectetur non, tincidunt eget sem. Aliquam tristique mattis urna, a posuere justo dapibus nec. Aenean non lacinia nisl. Aenean ac bibendum eros. Integer posuere enim tempor auctor venenatis. Etiam convallis nunc at eros ultrices, et elementum erat ultrices.</p>
+        <p>In aliquam maximus dui, nec iaculis nunc gravida et. Cras dapibus porta est, sed finibus arcu viverra in. Vivamus volutpat placerat urna, non varius sapien tempor sit amet. Cras quis dictum enim. Vestibulum ac rhoncus diam, non venenatis dolor. Curabitur ut velit tincidunt, pulvinar dolor sit amet, tincidunt arcu. Integer at ipsum eu ex blandit consectetur.</p>
+      </section>
+      
+      <section id="fourth">
+        <h2>Fourth section</h2>
+        <p>Aenean purus ex, auctor id dictum in, consequat ac lacus. Fusce aliquam tellus sed ante porttitor eleifend. Nam rutrum vulputate arcu sed euismod. Fusce diam nunc, cursus eget leo eget, interdum tempus arcu. Maecenas vestibulum faucibus dolor non fermentum. Donec tortor dui, aliquet vitae mauris id, condimentum eleifend felis.</p>
+        <p>In aliquam maximus dui, nec iaculis nunc gravida et. Cras dapibus porta est, sed finibus arcu viverra in. Vivamus volutpat placerat urna, non varius sapien tempor sit amet. Cras quis dictum enim. Vestibulum ac rhoncus diam, non venenatis dolor. Curabitur ut velit tincidunt, pulvinar dolor sit amet, tincidunt arcu. Integer at ipsum eu ex blandit consectetur.</p>
+      <p>Vivamus sed ullamcorper ex. Suspendisse potenti. Nam sodales hendrerit enim, non fringilla mauris gravida maximus. Sed pharetra purus eget quam auctor luctus. Aenean arcu nulla, aliquam ut consectetur non, tincidunt eget sem. Aliquam tristique mattis urna, a posuere justo dapibus nec. Aenean non lacinia nisl. Aenean ac bibendum eros. Integer posuere enim tempor auctor venenatis. Etiam convallis nunc at eros ultrices, et elementum erat ultrices.</p>
+        <p>In aliquam maximus dui, nec iaculis nunc gravida et. Cras dapibus porta est, sed finibus arcu viverra in. Vivamus volutpat placerat urna, non varius sapien tempor sit amet. Cras quis dictum enim. Vestibulum ac rhoncus diam, non venenatis dolor. Curabitur ut velit tincidunt, pulvinar dolor sit amet, tincidunt arcu. Integer at ipsum eu ex blandit consectetur.</p>
+      </section>
+      
+      <section id="fifth">
+        <h2>Fifth section</h2>
+        <p>Vivamus in elit non turpis eleifend egestas eget scelerisque turpis. Integer semper eget sem vel porttitor. Phasellus nec rhoncus elit. Donec feugiat mollis dui ac vehicula. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+        <p>In aliquam maximus dui, nec iaculis nunc gravida et. Cras dapibus porta est, sed finibus arcu viverra in. Vivamus volutpat placerat urna, non varius sapien tempor sit amet. Cras quis dictum enim. Vestibulum ac rhoncus diam, non venenatis dolor. Curabitur ut velit tincidunt, pulvinar dolor sit amet, tincidunt arcu. Integer at ipsum eu ex blandit consectetur.</p>
+        <p>Fusce quis rutrum turpis. Proin pulvinar, nisi id porttitor laoreet, neque diam finibus eros, a aliquam nibh libero quis nisi. Morbi vehicula tincidunt maximus.</p>
+      </section>
+      
+      <section id="sixth">
+        <h2>Sixth section</h2>
+        <p>Etiam id ex dolor. Curabitur quis tellus vitae neque finibus suscipit. Donec vel nisl ac justo mattis molestie. Vivamus in interdum est. Fusce sed malesuada tellus. Suspendisse imperdiet condimentum sem in tristique. Donec faucibus dui non pharetra cursus. Praesent congue turpis leo, vitae porttitor elit fringilla vel. Phasellus ut aliquet augue. Donec egestas luctus placerat.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi nisl, pharetra et odio non, sollicitudin bibendum enim. Integer posuere, est et posuere feugiat, nisi nunc auctor nisi, eu tristique ipsum justo ut tellus. Phasellus molestie ultricies sodales. Nunc nec ligula placerat, vehicula orci a, tincidunt ante. Donec ac metus quis nunc cursus tincidunt.</p>
+      <p>Vivamus sed ullamcorper ex. Suspendisse potenti. Nam sodales hendrerit enim, non fringilla mauris gravida maximus. Sed pharetra purus eget quam auctor luctus. Aenean arcu nulla, aliquam ut consectetur non, tincidunt eget sem. Aliquam tristique mattis urna, a posuere justo dapibus nec. Aenean non lacinia nisl. Aenean ac bibendum eros. Integer posuere enim tempor auctor venenatis. Etiam convallis nunc at eros ultrices, et elementum erat ultrices.</p>
+        <p>In aliquam maximus dui, nec iaculis nunc gravida et. Cras dapibus porta est, sed finibus arcu viverra in. Vivamus volutpat placerat urna, non varius sapien tempor sit amet. Cras quis dictum enim. Vestibulum ac rhoncus diam, non venenatis dolor. Curabitur ut velit tincidunt, pulvinar dolor sit amet, tincidunt arcu. Integer at ipsum eu ex blandit consectetur.</p>
+      </section>
+      
+      <section id="seventh">
+        <h2>Seventh section</h2>
+        <p>Aenean purus ex, auctor id dictum in, consequat ac lacus. Fusce aliquam tellus sed ante porttitor eleifend. Nam rutrum vulputate arcu sed euismod. Fusce diam nunc, cursus eget leo eget, interdum tempus arcu. Maecenas vestibulum faucibus dolor non fermentum. Donec tortor dui, aliquet vitae mauris id, condimentum eleifend felis.</p>
+        <p>In aliquam maximus dui, nec iaculis nunc gravida et. Cras dapibus porta est, sed finibus arcu viverra in. Vivamus volutpat placerat urna, non varius sapien tempor sit amet. Cras quis dictum enim. Vestibulum ac rhoncus diam, non venenatis dolor. Curabitur ut velit tincidunt, pulvinar dolor sit amet, tincidunt arcu. Integer at ipsum eu ex blandit consectetur.</p>
+      <p>Vivamus sed ullamcorper ex. Suspendisse potenti. Nam sodales hendrerit enim, non fringilla mauris gravida maximus. Sed pharetra purus eget quam auctor luctus. Aenean arcu nulla, aliquam ut consectetur non, tincidunt eget sem. Aliquam tristique mattis urna, a posuere justo dapibus nec. Aenean non lacinia nisl. Aenean ac bibendum eros. Integer posuere enim tempor auctor venenatis. Etiam convallis nunc at eros ultrices, et elementum erat ultrices.</p>
+        <p>In aliquam maximus dui, nec iaculis nunc gravida et. Cras dapibus porta est, sed finibus arcu viverra in. Vivamus volutpat placerat urna, non varius sapien tempor sit amet. Cras quis dictum enim. Vestibulum ac rhoncus diam, non venenatis dolor. Curabitur ut velit tincidunt, pulvinar dolor sit amet, tincidunt arcu. Integer at ipsum eu ex blandit consectetur.</p>
+      </section>
+      
+      <section id="eighth">
+        <h2>Eighth section</h2>
+        <p>Vivamus in elit non turpis eleifend egestas eget scelerisque turpis. Integer semper eget sem vel porttitor. Phasellus nec rhoncus elit. Donec feugiat mollis dui ac vehicula. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+        <p>In aliquam maximus dui, nec iaculis nunc gravida et. Cras dapibus porta est, sed finibus arcu viverra in. Vivamus volutpat placerat urna, non varius sapien tempor sit amet. Cras quis dictum enim. Vestibulum ac rhoncus diam, non venenatis dolor. Curabitur ut velit tincidunt, pulvinar dolor sit amet, tincidunt arcu. Integer at ipsum eu ex blandit consectetur.</p>
+        <p>Fusce quis rutrum turpis. Proin pulvinar, nisi id porttitor laoreet, neque diam finibus eros, a aliquam nibh libero quis nisi. Morbi vehicula tincidunt maximus.</p>
+      </section>
+      
+    </article>
 
-        <section class="intro-section">
-          <h2>Que sommes-nous ?</h2>
-          <p>Incubhacker est un hackerspace situé à Namur, un lieu convivial dédié à la création collaborative où se
-            rencontrent technologies, arts et innovations.
-            <br><br>
-            Avec 80 m² d’atelier équipé (outils de bricolage, découpe laser, impression 3D, etc.), il offre un espace
-            idéal pour prototyper, expérimenter et partager des savoirs. Ouvert à tous – makers, artistes, ingénieurs, bricoleurs –, 
-            c’est un endroit où les idées prennent vie grâce à l’entraide et aux outils mutualisés.
-            <br><br>            
-            Que ce soit pour un projet perso, professionnel ou juste par curiosité, Incubhacker est fait pour ceux
-            qui aiment faire, apprendre et innover ensemble. 🚀
-          </p>
-          
-          <div class="image-container">
-            <img src="./assets/convivialité2.jpg" alt="Espace de coworking moderne" class="stock-image">
-          </div>
-        </section>
-
-        <section class="activities-section">
-          <h2>Nos Activités</h2>
-          <div class="activity-grid">
-            <div class="activity-item">
-              <h3>🔧 Ateliers Techniques</h3>
-              <p>Découvrez l'électronique, la programmation, l'impression 3D et bien plus encore à travers nos ateliers pratiques animés par des passionnés.</p>
-            </div>
-            <div class="activity-item">
-              <h3>💡 Projets Collaboratifs</h3>
-              <p>Rejoignez des projets existants ou lancez vos propres initiatives. L'entraide et le partage d'expertise sont au cœur de notre démarche.</p>
-            </div>
-            <div class="activity-item">
-              <h3>🌐 Événements Communautaires</h3>
-              <p>Participez à nos conférences, hackathons et rencontres thématiques pour enrichir vos connaissances et votre réseau.</p>
-            </div>
-          </div>
-
-          <h2>Nos espaces</h2>
-          <div class="image-grid">
-            <div class="image-item">
-              <img src="./assets/laser.jpg" alt="Programmation et code">
-              <div class="image-caption">Découpe laser</div>
-            </div>
-            <div class="image-item">
-              <img src="./assets/imprimante3d.jpg" alt="Électronique et circuits">
-              <div class="image-caption">Impression 3D</div>
-            </div>
-            <div class="image-item">
-              <img src="./assets/electronique.jpg" alt="Impression 3D">
-              <div class="image-caption">Electronique</div>
-            </div>
-            <div class="image-item">
-              <img src="./assets/bricolage.jpg" alt="Impression 3D">
-              <div class="image-caption">Bricolage</div>
-            </div>
-            <div class="image-item">
-              <img src="https://images.unsplash.com/photo-1587440871875-191322ee64b0?w=400&h=200&fit=crop" alt="Impression 3D">
-              <div class="image-caption">Détente</div>
-            </div>
-            <div class="image-item">
-              <img src="./assets/Workspace.jpg" alt="Impression 3D">
-              <div class="image-caption">Workspace</div>
-            </div>
-            <div class="image-item">
-              <img src="https://images.unsplash.com/photo-1587440871875-191322ee64b0?w=400&h=200&fit=crop" alt="Impression 3D">
-              <div class="image-caption">Artistique</div>
-            </div>
-            <div class="image-item">
-              <img src="https://images.unsplash.com/photo-1587440871875-191322ee64b0?w=400&h=200&fit=crop" alt="Impression 3D">
-              <div class="image-caption">Imprimerie</div>
-            </div>
-            <div class="image-item">
-              <img src="./assets/vinyle.jpg" alt="Impression 3D">
-              <div class="image-caption">Decoupe vinyle</div>
-            </div>
-          </div>
-        </section>
-
-        <section class="philosophy-section">
-          <h2>Notre Philosophie</h2>
-          <blockquote>
-            "Le savoir se multiplie quand il se partage"
-          </blockquote>
-          <p>Chez Incubhacker, nous prônons l'apprentissage par la pratique, l'expérimentation et l'échange. Que vous soyez débutant ou expert, il y a toujours quelque chose à apprendre et à transmettre.</p>
-        </section>
-
-        
-
-        <section class="join-section">
-          <h2>Nous Rejoindre</h2>
-          <p>Envie de faire partie de l'aventure ? Que vous ayez un projet en tête ou simplement l'envie de découvrir, nos portes sont ouvertes. Venez nous rencontrer lors de nos soirées d'accueil ou contactez-nous directement.</p>
-          
-          <div class="contact-info">
-            <img src="./assets/ezgif.com-apng-to-gif.gif">
-          </div>
-          <div class="contact-info">
-            <p><strong>Adresse :</strong> Rue de l'Innovation, 42 - 5000 Namur</p>
-            <p><strong>Email :</strong> incubhacker@gmail.com</p>
-            <p><strong>Horaires :</strong> Jeudi dès 18h30, samedi dès 13h30, fermeture tardive ! (23h+)</p>
-          </div>
-        </section>
-        
-        <section class="partners-section">
-          <h2>Nos Partenaires</h2>
-          <p>Incubhacker collabore avec des entreprises locales, institutions et organisations qui partagent notre vision de l'innovation collaborative. Ensemble, nous créons un écosystème dynamique pour soutenir les makers et entrepreneurs de la région.</p>
-          <div class="partners-logo">
-            <div class="partners-grid">
-              <div class="partners-item">
-                <img src="./assets/namur.png" class="partner-logo">
-              </div>
-            </div>
-            <div class="partners-grid">
-              <div class="partners-item">
-                <img src="./assets/confluent.png" class="partner-logo">
-              </div>
-            </div>
-            <div class="partners-grid">
-              <div class="partners-item">
-                <img src="./assets/coworking.png" class="partner-logo">
-              </div>
-            </div>
-            <div class="partners-grid">
-              <div class="partners-item">
-                <img src="./assets/adrenaline.png" class="partner-logo">
-              </div>
-            </div>
-            <div class="partners-grid">
-              <div class="partners-item">
-                <img src="./assets/stargames.png" alt="Impression 3D" class="partner-logo">
-              </div>
-            </div>
-            <div class="partners-grid">
-              <div class="partners-item">
-                <img src="./assets/mantec-logo-1720103255.png" class="partner-logo">
-              </div>
-            </div>
-            <div class="partners-grid">
-              <div class="partners-item">
-                <img src="./assets/vigo.png" class="partner-logo">
-              </div>
-            </div>
-          </div>
-        </section>
-      </article>
-    </div>
-
-    
-
-    <!-- BOUTON RETOUR -->
-    <div class="actions">
-      <button onclick="window.location.href='index.html'">← Retour à la galerie</button>
-    </div>
-    
-    <!-- FOOTER -->
-    <div class="flexbox-footer">
-      <div></div>
-    </div>
-    
-  </div>
+<script src="script2.js"></script>
 </body>
 </html>
