@@ -118,3 +118,4 @@ drawPath();
 
 const observer = new IntersectionObserver(markVisibleSection);
 elementsToObserve.forEach(thisEl => observer.observe(thisEl));
+

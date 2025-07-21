@@ -438,3 +438,5 @@ body.debug h2 {
 } /* Jaune pour les titres */
 body.debug * {
   outline: 1px solid red; /* Met en évidence chaque élément */
+}
+
