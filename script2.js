@@ -15,12 +15,14 @@ const elementsToObserve = document.querySelectorAll('section[id]'),
 // Ajouter un écouteur d'événements sur chaque lien
 navItems.forEach(item => {
   item.anchor.addEventListener('click', () => {
-    nav.style.opacity = '0'; // Appliquer l'effet de fondu
-
-    // Délai pour donner le temps à l'animation de se jouer
-    setTimeout(() => {
-      nav.classList.remove('active'); // Fermer le menu
-    }, 300); // Temps doit correspondre à la durée d'animation (0.3s)
+    // Vérifier si la largeur de la fenêtre est inférieure à 700px
+    if (window.innerWidth < 700) {
+      nav.style.opacity = '0'; // Appliquer l'effet de fondu
+      // Délai pour donner le temps à l'animation de se jouer
+      setTimeout(() => {
+        nav.classList.remove('active'); // Fermer le menu
+      }, 300); // Temps doit correspondre à la durée d'animation (0.3s)
+    }
   });
 });
 
