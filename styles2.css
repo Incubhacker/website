@@ -400,6 +400,34 @@ p {
   font-weight: 500;
 }
 
+/* Style for the toggle button */
+.toggle-button {
+  display: none; /* Hidden by default */
+  background: rgba(30, 30, 30, 0.95);
+  color: #d0d0d0;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1001;
+}
+
+/* Show the toggle button only on smaller screens */
+@media (max-width: 700px) {
+  .toggle-button {
+    display: block;
+  }
+
+  nav {
+    display: none; /* Hide the nav by default */
+  }
+
+  nav.active {
+    display: block; /* Show nav when active */
+  }
+}
 
 
 
