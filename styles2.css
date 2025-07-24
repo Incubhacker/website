@@ -468,3 +468,25 @@ body.debug * {
   outline: 1px solid red; /* Met en évidence chaque élément */
 }
 
+
+.image-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.image-modal img {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.image-modal.active {
+  display: flex;
+}

@@ -130,3 +130,32 @@ elementsToObserve.forEach(thisEl => observer.observe(thisEl));
 
 // Écouter les événements de redimensionnement
 window.addEventListener('resize', handleResize);
+
+
+// Création du modal
+const modal = document.createElement('div');
+modal.classList.add('image-modal');
+document.body.appendChild(modal);
+
+// Écouter le clic sur les images
+const images = document.querySelectorAll('.main-flexbox img');
+
+images.forEach(image => {
+  image.addEventListener('click', () => {
+    const fullSrc = image.getAttribute('data-fullsrc'); // Obtenir la source de l'image en grand
+    const modalImage = document.createElement('img');
+    modalImage.src = fullSrc;
+
+    // Vider le contenu précédent et ajouter la nouvelle image
+    modal.innerHTML = '';
+    modal.appendChild(modalImage);
+    
+    // Afficher le modal
+    modal.classList.add('active');
+
+    // Fermer le modal en cliquant dessus
+    modal.addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+  });
+});
