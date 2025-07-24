@@ -491,3 +491,9 @@ blockquote {
 .card-wrapper {
   user-select: none; /* Prevent text selection during swipe */
 }
+
+.flexbox {
+  /* Activer les actions tactiles */
+  touch-action: pan-y; /* Autoriser le défilement vertical et verrouiller l'horizontal */
+  overflow: hidden; /* Empêcher l'apparition des barres de défilement */
+}
