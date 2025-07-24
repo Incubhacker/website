@@ -324,3 +324,29 @@ scheduleAutoScroll(3000);
 
 
 
+let touchStartX = 0;
+let touchEndX = 0;
+
+flexbox.addEventListener('touchstart', (event) => {
+  touchStartX = event.changedTouches[0].clientX; // Capture start position
+});
+
+flexbox.addEventListener('touchend', (event) => {
+  touchEndX = event.changedTouches[0].clientX; // Capture end position
+  handleSwipeGesture();
+});
+
+function handleSwipeGesture() {
+  const swipeDistance = touchEndX - touchStartX;
+  
+  // Check if the swipe distance exceeds a threshold (50 pixels)
+  if (swipeDistance > 50) {
+    // Swipe right
+    scrubTo(scrub.vars.totalTime - spacing); // Navigate left
+    manualInteraction();
+  } else if (swipeDistance < -50) {
+    // Swipe left
+    scrubTo(scrub.vars.totalTime + spacing); // Navigate right
+    manualInteraction();
+  }
+}

@@ -484,3 +484,10 @@ blockquote {
   font-size: 0.9rem;
 }
 
+.cards {
+  touch-action: pan-y; /* Allow vertical scrolling but lock horizontal */
+}
+
+.card-wrapper {
+  user-select: none; /* Prevent text selection during swipe */
+}
