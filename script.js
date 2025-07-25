@@ -325,28 +325,41 @@ scheduleAutoScroll(3000);
 
 
 let initialTouchPos = null;
+let isSwiping = false; // Ajoutez une variable pour suivre l'état du balayage
 
 flexbox.addEventListener('touchstart', (event) => {
   initialTouchPos = event.touches[0].clientX;
+  isSwiping = false; // Réinitialisez à chaque départ de toucher
 });
 
 flexbox.addEventListener('touchmove', (event) => {
-  event.preventDefault();
+  if (!isSwiping) {
+    const currentTouchPos = event.touches[0].clientX;
+    const swipeDistance = currentTouchPos - initialTouchPos;
+
+    // Ne prévenez le défilement que si le balayage dépasse un certain seuil
+    if (Math.abs(swipeDistance) > 20) {
+      isSwiping = true;
+      event.preventDefault(); // Empêche le défilement si le balayage est actif
+    }
+  }
 });
 
 flexbox.addEventListener('touchend', (event) => {
   const finalTouchPos = event.changedTouches[0].clientX;
-  handleSwipeGesture(initialTouchPos, finalTouchPos);
+  if (isSwiping) {
+    handleSwipeGesture(initialTouchPos, finalTouchPos);
+  }
 });
 
 function handleSwipeGesture(startPos, endPos) {
   const swipeDistance = endPos - startPos;
 
   if (swipeDistance > 50) {
-    scrubTo(scrub.vars.totalTime - spacing);
+    scrubTo(scrub.vars.totalTime - spacing); // Naviguer vers la gauche
     manualInteraction();
   } else if (swipeDistance < -50) {
-    scrubTo(scrub.vars.totalTime + spacing);
+    scrubTo(scrub.vars.totalTime + spacing); // Naviguer vers la droite
     manualInteraction();
   }
 }
