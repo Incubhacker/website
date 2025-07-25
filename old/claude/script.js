@@ -16,7 +16,7 @@ const spacing = 0.1,
     ease: "power3",
     paused: true
   });
-
+  
 // 🎯 RESTAURER LA LOGIQUE ORIGINALE DE SCRUBTO
 function scrubTo(totalTime) {
   console.log("scrubTo appelé avec:", totalTime);
