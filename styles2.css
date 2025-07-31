@@ -418,6 +418,7 @@ p {
 }
 
 
+/* Section existante pour .contact-info */
 .contact-info {
   background: #1a1a1a;
   color: #e0e0e0;
@@ -430,10 +431,20 @@ p {
 .contact-info p {
   margin-bottom: 0.5rem;
   color: #d0d0d0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .contact-info strong {
   color: #c3f79d;
+  white-space: nowrap;  /* Ajouté : Empêche le texte de se briser sur une nouvelle ligne */
+}
+
+.contact-info p .non-strong {
+  text-align: right;
+  flex-grow: 1;
+  margin-left: 1rem;  /* Gardez cet espace pour la séparation, mais ajustez si nécessaire */
 }
 
 .contact-info img {
@@ -445,7 +456,6 @@ p {
   display: block;
   margin: 0 auto;
 }
-
 /* ========================
    IMAGES STOCK
 ======================== */
