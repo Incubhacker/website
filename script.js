@@ -1,3 +1,22 @@
+/**
+ * Limite la fréquence d'exécution d'une fonction.
+ * @param {Function} func La fonction à exécuter.
+ * @param {number} limit Le délai en millisecondes.
+ * @returns {Function} La nouvelle fonction "throttled".
+ */
+function throttle(func, limit) {
+  let inThrottle;
+  return function() {
+    const args = arguments;
+    const context = this;
+    if (!inThrottle) {
+      func.apply(context, args);
+      inThrottle = true;
+      setTimeout(() => inThrottle = false, limit);
+    }
+  }
+}
+
 gsap.registerPlugin(ScrollTrigger);
 
 let iteration = 0;
@@ -78,7 +97,8 @@ if (prevBtn) {
 
 // Événements molette sur la flexbox SEULEMENT si survol carte active
 if (flexbox) {
-  flexbox.addEventListener("wheel", (e) => {
+  // Crée une fonction "throttled" pour gérer le défilement
+  const throttledWheelHandler = throttle((e) => {
     if (isOverActiveCard) {
       e.preventDefault();
       if (e.deltaY > 0) {
@@ -88,7 +108,9 @@ if (flexbox) {
       }
       manualInteraction();
     }
-  });
+  }, 800); // <-- Délai de 800ms avant de pouvoir défiler à nouveau
+
+  flexbox.addEventListener("wheel", throttledWheelHandler);
 
   // Clavier sur la flexbox
   flexbox.addEventListener("keydown", (e) => {
@@ -319,10 +341,6 @@ setInterval(updateActiveCard, 100);
 
 // Lancement initial
 scheduleAutoScroll(3000);
-
-
-
-
 
 let initialTouchPos = null;
 let isSwiping = false; // Ajoutez une variable pour suivre l'état du balayage
