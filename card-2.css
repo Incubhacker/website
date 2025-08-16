@@ -78,8 +78,9 @@
   position: absolute;
   inset: 0;                      /* top/right/bottom/left = 0 */
   border-radius: 1rem;
-  background: url("./assets/convivialité.jpg") no-repeat left top;
-  background-size: contain;
+  background: url("./assets/atelier.jpg") no-repeat left top;
+  background-size: 70%;
+  background-position-y: bottom;
   background-attachment: fixed;
 
   /* Masque dégradé : opaque jusqu'à 50%, puis fondu vers transparent à 60% */
