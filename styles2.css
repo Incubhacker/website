@@ -631,3 +631,20 @@ body.debug * {
 }
 
 
+.social-row {
+  display: flex;
+  align-items: center;
+  height: 180px;
+  width: 100%;
+  background:green;
+}
+
+.social-item {
+  text-align: center;
+}
+
+.social-item:nth-child(1) { width: 20%; }
+.social-item:nth-child(2) { width: 80%; }
+.social-item:nth-child(3) { width: 20%; }
+
+iframe { border: none; }
