@@ -250,23 +250,25 @@ function updateActiveCard() {
   }
 }
 
+// --- Helpers ---
 function wrapText(ctx, text, maxWidth) {
-  const words = text.split(' ');
+  const paragraphs = String(text).replace(/\r\n?/g, '\n').split('\n');
   const lines = [];
-  let line = '';
-
-  for (let i = 0; i < words.length; i++) {
-    const testLine = line + words[i] + ' ';
-    const testWidth = ctx.measureText(testLine).width;
-
-    if (testWidth > maxWidth && i > 0) {
-      lines.push(line.trim());
-      line = words[i] + ' ';
-    } else {
-      line = testLine;
+  for (const para of paragraphs) {
+    if (para === '') { lines.push(''); continue; }
+    const words = para.split(/\s+/);
+    let line = '';
+    for (const word of words) {
+      const test = line ? line + ' ' + word : word;
+      if (ctx.measureText(test).width > maxWidth && line) {
+        lines.push(line);
+        line = word;
+      } else {
+        line = test;
+      }
     }
+    lines.push(line);
   }
-  lines.push(line.trim());
   return lines;
 }
 
@@ -277,65 +279,101 @@ function textToPNG(text, width = 600, height = 500, font = 'bold 36px Arial', co
   const ctx = canvas.getContext('2d');
 
   ctx.clearRect(0, 0, width, height);
-
   ctx.fillStyle = color;
   ctx.font = font;
   ctx.textBaseline = 'middle';
   ctx.textAlign = align;
 
+  const fontSize = parseInt((font.match(/(\d+)px/) || [0, 36])[1], 10) || 36;
+  const lineHeight = Math.round(fontSize * 1.2);
+
   const lines = wrapText(ctx, text, width * 0.9);
-  const lineHeight = 40;
   const totalHeight = lines.length * lineHeight;
-  let startY = (height - totalHeight) / 2 + lineHeight / 2;
+  let y = (height - totalHeight) / 2 + lineHeight / 2;
+  const x = align === 'right' ? width * 0.95 : align === 'left' ? width * 0.05 : width / 2;
 
-  let x;
-  if (align === 'right') {
-    x = width * 0.95;
-  } else if (align === 'left') {
-    x = width * 0.05;
-  } else {
-    x = width / 2;
+  for (const line of lines) {
+    ctx.fillText(line, x, y);
+    y += lineHeight;
   }
-
-  lines.forEach(line => {
-    ctx.fillText(line, x, startY);
-    startY += lineHeight;
-  });
-
   return canvas.toDataURL('image/png');
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  const cards = document.querySelectorAll('.card-1, .card-2, .card-3, .card-4, .card-5, .card-6, .card-7, .card-8, .card-9, .card-10, .card-11, .card-12, .card-13, .card-14, .card-15');
+// Convertit le HTML d’un élément en texte multi-ligne pour le canvas
+function extractTextWithNewlines(el) {
+  // 1) Prendre le HTML brut (pas textContent) pour capter les <br>
+  let html = el.innerHTML;
 
-  cards.forEach(card => {
-    const leftSide = card.querySelector('.left-side');
-    if (leftSide) {
-      const texteOriginal = leftSide.textContent.trim();
-      if (texteOriginal) {
+  // 2) Remplacer les balises qui créent des retours à la ligne
+  html = html
+    .replace(/<br\s*\/?>/gi, '\n')                // <br> -> \n
+    .replace(/<\/(p|div|li|h[1-6]|section|article)>/gi, '\n'); // fermetures de blocs -> \n
+
+  // 3) Supprimer le reste des balises
+  html = html.replace(/<[^>]+>/g, '');
+
+  // 4) Décoder les entités HTML (nbsp, amp, etc.)
+  const tmp = document.createElement('textarea');
+  tmp.innerHTML = html;
+  let text = tmp.value;
+
+  // 5) Normaliser et gérer les “\n” littéraux
+  text = text
+    .replace(/\r\n?/g, '\n')  // CRLF -> LF
+    .replace(/\\n/g, '\n')    // littéral "\n" (deux caractères) -> vrai saut de ligne
+    .replace(/\t/g, ' ')      // tab -> espace
+    .replace(/[ \u00A0]{2,}/g, ' ') // espaces multiples -> 1 espace
+    .trim();
+
+  return text;
+}
+
+// --- Main ---
+window.addEventListener('DOMContentLoaded', () => {
+  console.log('LOADED script v2 (right-side PNG with real newlines)');
+
+  // IMPORTANT: ne laissez AUCUN autre bloc plus bas refaire la même chose sur .right-side
+  const allCards = document.querySelectorAll('.card-1, .card-2, .card-3, .card-4, .card-5, .card-6, .card-7, .card-8, .card-9, .card-10, .card-11, .card-12, .card-13, .card-14, .card-15');
+
+  allCards.forEach(card => {
+    // left-side: vous pouvez garder votre logique actuelle si ça marche pour vous,
+    // ou harmoniser comme pour right-side. Ici je laisse simple:
+    const left = card.querySelector('.left-side');
+    if (left) {
+      const rawLeft = left.textContent.trim();
+      if (rawLeft) {
         const img = document.createElement('img');
-        img.src = textToPNG(texteOriginal, 600, 500, 'bold 36px Arial', 'white', 'center');
+        img.src = textToPNG(rawLeft, 600, 500, 'bold 36px Arial', 'white', 'center');
         img.style.width = '100%';
         img.style.height = 'auto';
-        leftSide.innerHTML = '';
-        leftSide.appendChild(img);
+        left.innerHTML = '';
+        left.appendChild(img);
       }
     }
 
-    const rightSide = card.querySelector('.right-side');
-    if (rightSide) {
-      const texteOriginal = rightSide.textContent.trim();
-      if (texteOriginal) {
+    // right-side: conversion robuste (HTML -> \n -> image)
+    const right = card.querySelector('.right-side');
+    if (right) {
+      // Si un <img> existe déjà (ancien script), ne pas retraiter
+      if (right.querySelector('img')) return;
+
+      const multiline = extractTextWithNewlines(right);
+
+      // Debug utile pour voir ce que le canvas va recevoir
+      console.log('right-side text:', JSON.stringify(multiline));
+
+      if (multiline) {
         const img = document.createElement('img');
-        img.src = textToPNG(texteOriginal, 600, 500, 'bold 36px Arial', 'white', 'center');
+        img.src = textToPNG(multiline, 600, 500, 'bold 36px Arial', 'white', 'center');
         img.style.width = '100%';
         img.style.height = 'auto';
-        rightSide.innerHTML = '';
-        rightSide.appendChild(img);
+        right.innerHTML = '';
+        right.appendChild(img);
       }
     }
   });
 });
+
 
 setInterval(updateActiveCard, 100);
 
