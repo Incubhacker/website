@@ -1,202 +1,251 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <title>Galerie GSAP - Défilement Infini</title>
   <meta charset="UTF-8" />
+  <title>Galerie GSAP - Défilement Infini</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="styles.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-  <link rel="stylesheet" href="./card-1.css" />
-  <link rel="stylesheet" href="./card-2.css" />
-  <link rel="stylesheet" href="./card-3.css" />
-  <link rel="stylesheet" href="./card-4.css" />
-  <link rel="stylesheet" href="./card-5.css" />
-  <link rel="stylesheet" href="./card-6.css" />
-  <link rel="stylesheet" href="./card-7.css" />
-  <link rel="stylesheet" href="./card-8.css" />
-  <link rel="stylesheet" href="./card-9.css" />
-  <link rel="stylesheet" href="./card-10.css" />
-  <link rel="stylesheet" href="./card-11.css" />
-  <link rel="stylesheet" href="./card-12.css" />
-  <link rel="stylesheet" href="./card-13.css" />
-  <link rel="stylesheet" href="./card-14.css" />
-  <link rel="stylesheet" href="./card-15.css" />
+  <!-- CSS -->
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="card-1.css" />
+  <link rel="stylesheet" href="card-2.css" />
+  <link rel="stylesheet" href="card-3.css" />
+  <link rel="stylesheet" href="card-4.css" />
+  <link rel="stylesheet" href="card-5.css" />
+  <link rel="stylesheet" href="card-6.css" />
+  <link rel="stylesheet" href="card-7.css" />
+  <link rel="stylesheet" href="card-8.css" />
+  <link rel="stylesheet" href="card-9.css" />
+  <link rel="stylesheet" href="card-10.css" />
+  <link rel="stylesheet" href="card-11.css" />
+  <link rel="stylesheet" href="card-12.css" />
+  <link rel="stylesheet" href="card-13.css" />
+  <link rel="stylesheet" href="card-14.css" />
+  <link rel="stylesheet" href="card-15.css" />
+
+  <!-- Librairies (si votre script.js utilise GSAP) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
 </head>
 <body>
   <div class="BackgroundIncub"></div>
+
   <div class="main-flexbox">
-    
     <!-- HEADER -->
     <div class="flexbox-header"></div>
-    
+
+    <!-- GALERIE -->
     <div class="gallery">
       <ul class="cards">
         <li class="card-wrapper">
           <div class="card card-1">
             <div class="card-header">Le hackerspace de Namur</div>
-              <div class="back-side">
-                 <div class="left-side">1</div>
-                 <div class="right-side">Le concept Incubhacker c'est de rassembler des personnes créatives et motivées pour partager des découvertes et réaliser des projets dans une ambiance conviviale</div>
+            <div class="back-side">
+              <div class="left-side">⠀</div>
+              <div class="right-side">
+                Le concept Incubhacker c'est de rassembler des personnes créatives et motivées pour partager des découvertes et réaliser des projets dans une ambiance conviviale.
               </div>
+            </div>
             <div class="card-footer">incubhacker</div>
           </div>
         </li>
+
         <li class="card-wrapper">
           <div class="card card-2">
             <div class="card-header">Un espace bricolage</div>
-              <div class="back-side">
-                 <div class="left-side"></div>
-                 <div class="right-side">Nous avons à dispostion un petit atelier bien équipé pour vous permettre de réaliser vos projets !\n\nScie cictulaire, foreuses, ponceuse et plein d'outillages manuel et électrique qui n'attendent que vous !</div>
+            <div class="back-side">
+              <div class="left-side">⠀</div>
+              <div class="right-side">
+                Nous avons à dispostion un petit atelier bien équipé pour vous permettre de réaliser vos projets !<br>
+                Scie circulaire, foreuses, ponceuse et plein d'outillage manuel et électrique qui n'attendent que vous !
               </div>
+            </div>
             <div class="card-footer">incubhacker</div>
           </div>
         </li>
+
         <li class="card-wrapper">
           <div class="card card-3">
             <div class="card-header">Un espace électronique</div>
-              <div class="back-side">
-                 <div class="left-side"></div>
-                 <div class="right-side">Besoin de re-souder un connecteur ?\nSouder quelque composants électronique pour un projet avec Arduino ?\nVérifier une tension avec un multi-mètre ?\nMesurer des signaux avec un oscilloscope ?\n\nIl y a ce qu'il faut ! </div>
+            <div class="back-side">
+              <div class="left-side">⠀</div>
+              <div class="right-side">
+                Besoin de re-souder un connecteur ?
+                Souder quelques composants électroniques pour un projet avec Arduino ?
+                Vérifier une tension avec un multimètre ?
+                Mesurer des signaux avec un oscilloscope ?<br>
+                Il y a ce qu'il faut !
               </div>
+            </div>
             <div class="card-footer">incubhacker</div>
           </div>
         </li>
+
         <li class="card-wrapper">
           <div class="card card-4">
             <div class="card-header">Un espace impression 3D</div>
-              <div class="back-side">
-                 <div class="left-side"></div>
-                 <div class="right-side">Plusieurs imprimantes 3d sont a disposition pour les projets les plus fou ! \n\nJ'usqu'à un volume d'impression maximal possible de 50*50*50 cm </div>
+            <div class="back-side">
+              <div class="left-side">⠀</div>
+              <div class="right-side">
+                Plusieurs imprimantes 3D sont à disposition pour les projets les plus fous !<br>
+                Jusqu'à un volume d'impression maximal possible de 50 × 50 × 50 cm.
               </div>
+            </div>
             <div class="card-footer">incubhacker</div>
           </div>
         </li>
+
         <li class="card-wrapper">
           <div class="card card-5">
-            <div class="card-header">Un espace découpe laser</div>
-              <div class="back-side">
-                 <div class="left-side"></div>
-                 <div class="right-side">Nos découpeuses laser 80w CO² vous permetront de découper toute sorte de matériaux avec une précision étonnante.\n\nBois, plexi, carton, cuir et textile, etc...\n\nTout y passe ou presque !\n(sauf métaux) </div>
+            <div class="card-header">Un espace laser</div>
+            <div class="back-side">
+              <div class="left-side">⠀</div>
+              <div class="right-side">
+                Nos découpeuses laser 80W CO₂ vous permettront de découper toute sorte de matériaux avec une précision étonnante.<br>
+                Bois, plexi, carton, cuir et textile, etc...
+                Tout y passe ou presque !
+                (sauf métaux)
               </div>
+            </div>
             <div class="card-footer">incubhacker</div>
           </div>
         </li>
+
         <li class="card-wrapper">
           <div class="card card-6">
             <div class="card-header">Un espace broderie</div>
-              <div class="back-side">
-                 <div class="left-side"></div>
-                 <div class="right-side">Fabriquer vous-même vos écussons ou personaliser un vétement !\n\nDeux brodeuses.\n\nL'une moderne pour des petits projets rapide, l'autre diy pour les aventuriers qui veulent voir en plus grand !</div>
+            <div class="back-side">
+              <div class="left-side">⠀</div>
+              <div class="right-side">
+                Fabriquez vous-même vos écussons ou personnalisez un vêtement !<br>
+                Deux brodeuses : l'une moderne pour des petits projets rapides, l'autre DIY pour les aventuriers qui veulent voir en plus grand !
               </div>
+            </div>
             <div class="card-footer">incubhacker</div>
           </div>
         </li>
+
         <li class="card-wrapper">
           <div class="card card-7">
             <div class="card-header">Un espace artistique</div>
-              <div class="back-side">
-                 <div class="left-side"></div>
-                 <div class="right-side">Si vous êtes plus artistique, vous êtes également les bienvenus ! \n\nNos autres espaces vous donerons des possibilités insoupçonnées pour pousser vos expérimentations en mode 2.0 !</div>
+            <div class="back-side">
+              <div class="left-side">⠀</div>
+              <div class="right-side">
+                Si vous êtes plus artistique, vous êtes également les bienvenus !<br>
+                Nos autres espaces vous donneront des possibilités insoupçonnées pour pousser vos expérimentations en mode 2.0 !
               </div>
+            </div>
             <div class="card-footer">incubhacker</div>
           </div>
         </li>
+
         <li class="card-wrapper">
           <div class="card card-8">
             <div class="card-header">Un espace fraisage CNC</div>
-              <div class="back-side">
-                 <div class="left-side"></div>
-                 <div class="right-side">Une grande fraiseuse à portique numérique vous permettra d'usiner toutes sorte de matériaux sur une grande surface. </div>
+            <div class="back-side">
+              <div class="left-side">⠀</div>
+              <div class="right-side">
+                Une grande fraiseuse à portique numérique vous permettra d'usiner toutes sortes de matériaux sur une grande surface.
               </div>
+            </div>
             <div class="card-footer">incubhacker</div>
           </div>
         </li>
+
         <li class="card-wrapper">
           <div class="card card-9">
-            <div class="card-header">9 Le hackerspace de Namur</div>
-              <div class="back-side">
-                 <div class="left-side">9</div>
-                 <div class="right-side">.</div>
-              </div>
+            <div class="card-header">Un espace découpe</div>
+            <div class="back-side">
+              <div class="left-side">⠀</div>
+              <div class="right-side">nos traceurs et decoupeurs vinyle pour découper des autocolants ou imprimer à l'ancienne en mode plotters </div>
+            </div>
             <div class="card-footer">incubhacker</div>
           </div>
         </li>
+
         <li class="card-wrapper">
           <div class="card card-10">
-            <div class="card-header">10 Le hackerspace de Namur</div>
-              <div class="back-side">
-                 <div class="left-side">10</div>
-                 <div class="right-side">.</div>
+            <div class="card-header">un espace imprimerie</div>
+            <div class="back-side">
+              <div class="left-side">⠀</div>
+              <div class="right-side">Derniere arrivée dans notre arsenal, cette imprimante à jet d'encre géante a encore besoin d'un peu d'amour avant de pouvoir rendre service...
+                <br>
+                Coming Soon !
               </div>
+            </div>
             <div class="card-footer">incubhacker</div>
           </div>
         </li>
+
         <li class="card-wrapper">
           <div class="card card-11">
             <div class="card-header">11 Le hackerspace de Namur</div>
-              <div class="back-side">
-                 <div class="left-side">11</div>
-                 <div class="right-side">.</div>
-              </div>
+            <div class="back-side">
+              <div class="left-side">⠀</div>
+              <div class="right-side">.</div>
+            </div>
             <div class="card-footer">incubhacker</div>
           </div>
         </li>
+
         <li class="card-wrapper">
           <div class="card card-12">
             <div class="card-header">12 Le hackerspace de Namur</div>
-              <div class="back-side">
-                 <div class="left-side">12</div>
-                 <div class="right-side">.</div>
-              </div>
+            <div class="back-side">
+              <div class="left-side">⠀</div>
+              <div class="right-side">.</div>
+            </div>
             <div class="card-footer">incubhacker</div>
           </div>
         </li>
+
         <li class="card-wrapper">
           <div class="card card-13">
             <div class="card-header">13 Le hackerspace de Namur</div>
-              <div class="back-side">
-                 <div class="left-side">13</div>
-                 <div class="right-side">.</div>
-              </div>
+            <div class="back-side">
+              <div class="left-side">⠀</div>
+              <div class="right-side">.</div>
+            </div>
             <div class="card-footer">incubhacker</div>
           </div>
         </li>
+
         <li class="card-wrapper">
           <div class="card card-14">
             <div class="card-header">14 Le hackerspace de Namur</div>
-              <div class="back-side">
-                 <div class="left-side">14</div>
-                 <div class="right-side">.</div>
-              </div>
+            <div class="back-side">
+              <div class="left-side">⠀</div>
+              <div class="right-side">.</div>
+            </div>
             <div class="card-footer">incubhacker</div>
           </div>
         </li>
+
         <li class="card-wrapper">
           <div class="card card-15">
             <div class="card-header">15 Le hackerspace de Namur</div>
-              <div class="back-side">
-                 <div class="left-side">15</div>
-                 <div class="right-side">.</div>
-              </div>
+            <div class="back-side">
+              <div class="left-side">⠀</div>
+              <div class="right-side">.</div>
+            </div>
             <div class="card-footer">incubhacker</div>
           </div>
         </li>
       </ul>
     </div>
+
+    <!-- ACTIONS -->
     <div class="actions">
-      <button class="prev">Précédent</button>
-      <button class="next">Suivant</button>
-      <button onclick="window.location.href='page2.html'">Plus d'informations</button>
+      <button class="prev" type="button">Précédent</button>
+      <button class="next" type="button">Suivant</button>
+      <button type="button" onclick="window.location.href='page2.html'">Plus d'informations</button>
     </div>
-    
+
     <!-- FOOTER -->
-    <div class="flexbox-footer">
-      <div></div>
-    </div>
-    
+    <div class="flexbox-footer"></div>
   </div>
-  <script src="script.js"></script>
+
+  <!-- Votre script (doit exister dans votre projet) -->
+  <script src="script.js" defer></script>
 </body>
 </html>
