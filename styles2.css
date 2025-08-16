@@ -634,9 +634,9 @@ body.debug * {
 .social-row {
   display: flex;
   align-items: center;
-  height: 180px;
+  height: 130px;
   width: 100%;
-  background:green;
+  background:transparent;
 }
 
 .social-item {
