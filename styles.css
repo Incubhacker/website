@@ -273,26 +273,7 @@ body {
 }
 
 /* 👇 AJOUTÉ: Ciblage spécifique des boutons */
-.actions button:nth-child(1),
-.actions button:nth-child(2) {
-  flex: 0 0 auto;
-}
 
-.actions button:nth-child(3) {
-  flex: 0 0 auto;
-  flex-basis: auto;
-  width: auto;
-  align-self: center;
-  margin-top: 0.2rem; /* 👈 RÉDUIT: 0.5rem → 0.2rem */
-  order: 3;
-}
-
-.actions::after {
-  content: "";
-  flex-basis: 100%;
-  height: 0;
-  order: 2;
-}
 
 button {
   display: inline-block;
@@ -394,4 +375,114 @@ html, body {
   /* Activer les actions tactiles */
   touch-action: pan-y; /* Autoriser le défilement vertical et verrouiller l'horizontal */
   overflow: hidden; /* Empêcher l'apparition des barres de défilement */
+}
+
+/* Actions globales */
+.actions {
+  display: flex;
+  flex-wrap: wrap;           /* le conteneur peut se replier */
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Annule le pseudo-élément qui forçait un retour à la ligne */
+.actions::after { content: none; }
+
+/* Le groupe IG — En savoir plus — IG reste toujours sur UNE ligne */
+.actions .cta-group {
+  display: flex;
+  flex-wrap: nowrap;         /* ne se replie pas */
+  align-items: center;
+  gap: 0.6rem;
+  white-space: nowrap;       /* empêche le retour à la ligne du texte */
+  flex: 0 0 auto;            /* ne s'étire pas */
+}
+
+/* Empêche les éléments du groupe de s'étirer ou de passer à la ligne */
+.actions .cta-group > * {
+  flex: 0 0 auto;
+}
+
+/* Optionnel: compacter un peu les boutons Instagram */
+.actions .ig {
+  padding: 8px 10px;
+}
+.actions .ig img {
+  display: block;            /* supprime l'espace inline autour de l'image */
+}
+
+/* Fallback responsive très étroit: réduire un peu la taille si nécessaire */
+@media (max-width: 360px) {
+  .actions .cta-group button { padding: 8px 14px; font-size: 16px; }
+  .actions .ig img { width: 24px; height: 24px; }
+}
+/* ====== Actions: tailles figées et uniformes ====== */
+:root {
+  --actions-btn-h: 48px;   /* hauteur de tous les boutons */
+  --actions-gap: 10px;     /* espacement fixe (en px) */
+  --ig-icon: 28px;         /* taille de l’icône Instagram */
+}
+
+/* Le conteneur d'actions: gap fixe en px pour éviter les variations liées au rem */
+.actions {
+  gap: var(--actions-gap);
+}
+
+/* Le groupe "IG — En savoir plus — IG" ne se replie pas et ne rétrécit pas */
+.actions .cta-group {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  gap: var(--actions-gap);
+  flex: 0 0 auto;           /* pas d’élasticité */
+}
+
+/* Tous les boutons de .actions: même hauteur, pas d’élasticité */
+.actions > button,
+.actions .cta-group > button {
+  height: var(--actions-btn-h);
+  line-height: 1;           /* évite que la line-height gonfle la hauteur */
+  padding: 0 20px;          /* hauteur contrôlée par height, pas par padding */
+  flex: 0 0 auto;           /* ni grow ni shrink */
+}
+
+/* Boutons Instagram carrés et centrés */
+.actions .cta-group .ig {
+  width: var(--actions-btn-h);
+  padding: 0;               /* carré exact */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.actions .cta-group .ig img {
+  width: var(--ig-icon);
+  height: var(--ig-icon);
+  display: block;
+}
+
+/* Option: largeur fixe pour le bouton central "En savoir plus"
+   (retire cette règle si tu préfères une largeur auto mais elle ne rétrécira pas) */
+.actions .cta-group > button:not(.ig) {
+  width: 180px;             /* fixe (ne varie pas avec le viewport) */
+  text-align: center;
+}
+
+/* Désactiver le fallback responsive qui changeait tailles et padding */
+@media (max-width: 360px) {
+  .actions .cta-group button { 
+    padding: 0 20px;        /* on remet la même valeur qu’en desktop */
+    font-size: 20px;        /* idem: pas de réduction typographique */
+  }
+  .actions .ig img { 
+    width: var(--ig-icon); 
+    height: var(--ig-icon); 
+  }
+}
+
+/* (Option) Uniformiser aussi Prev/Suiv avec les mêmes tailles */
+.actions > .prev,
+.actions > .next {
+  height: var(--actions-btn-h);
+  padding: 0 20px;
 }

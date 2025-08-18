@@ -234,13 +234,30 @@
       </ul>
     </div>
 
-    <!-- ACTIONS -->
     <div class="actions">
       <button class="prev" type="button">Précédent</button>
       <button class="next" type="button">Suivant</button>
-      <button type="button" onclick="window.location.href='page2.html'">En savoir plus</button>
+    
+      <!-- Groupe des 3 CTA sur UNE seule ligne -->
+      <div class="cta-group" role="group" aria-label="Suivre et en savoir plus">
+        <button type="button" class="ig"
+                onclick="window.open('https://www.instagram.com/incubhacker','_blank');"
+                aria-label="Instagram">
+          <img src="./assets/instagram.png" alt="Instagram" width="30" height="30">
+        </button>
+    
+        <button type="button" onclick="window.location.href='page2.html'">
+          En savoir plus
+        </button>
+    
+        <button type="button" class="ig"
+                onclick="window.open('https://www.instagram.com/incubhacker','_blank');"
+                aria-label="Instagram">
+          <img src="./assets/instagram.png" alt="Instagram" width="30" height="30">
+        </button>
+      </div>
     </div>
-
+    
     <!-- FOOTER -->
     <div class="flexbox-footer"></div>
   </div>
