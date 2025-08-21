@@ -377,80 +377,65 @@ html, body {
   overflow: hidden; /* Empêcher l'apparition des barres de défilement */
 }
 
-/* Actions globales */
+/* ========================
+   ACTIONS / BOUTONS — VERSION PROPRE
+======================== */
+
+/* Variables par défaut (si non déjà définies plus haut) */
+:root {
+  --actions-btn-h: 48px;
+  --actions-gap: 10px;
+  --ig-icon: 28px;
+}
+
+/* Conteneur d’actions: Prev | Next au-dessus, puis le groupe IG/More/IG */
 .actions {
+  position: relative;
   display: flex;
-  flex-wrap: wrap;           /* le conteneur peut se replier */
+  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  gap: 1rem;
+  align-content: flex-start;
+  gap: var(--actions-gap);
+  pointer-events: auto;
+  padding: 1rem;
+  margin: 0.5rem;
+  border-radius: 10px;
 }
 
-/* Annule le pseudo-élément qui forçait un retour à la ligne */
-.actions::after { content: none; }
+/* Prev / Next toujours en premier et sur la même ligne si possible */
+.actions > .prev,
+.actions > .next {
+  order: 0;
+  flex: 0 0 auto;
+  height: var(--actions-btn-h);
+  line-height: 1;
+  padding: 0 20px;
+}
 
-/* Le groupe IG — En savoir plus — IG reste toujours sur UNE ligne */
+/* Le groupe IG — En savoir plus — IG passe en dessous (nouvelle ligne) */
 .actions .cta-group {
-  display: flex;
-  flex-wrap: nowrap;         /* ne se replie pas */
+  order: 1;
+  flex: 0 0 100%;           /* force une nouvelle ligne sous Prev/Next */
+  display: inline-flex;     /* affichage “large” par défaut: une ligne */
+  flex-wrap: nowrap;
+  justify-content: center;  /* centre l’ensemble */
   align-items: center;
-  gap: 0.6rem;
-  white-space: nowrap;       /* empêche le retour à la ligne du texte */
-  flex: 0 0 auto;            /* ne s'étire pas */
+  gap: var(--actions-gap);
+  white-space: nowrap;
 }
 
-/* Empêche les éléments du groupe de s'étirer ou de passer à la ligne */
-.actions .cta-group > * {
+/* Boutons uniformes à l’intérieur du groupe en mode large */
+.actions .cta-group > button {
+  height: var(--actions-btn-h);
+  line-height: 1;
+  padding: 0 20px;
   flex: 0 0 auto;
 }
 
-/* Optionnel: compacter un peu les boutons Instagram */
-.actions .ig {
-  padding: 8px 10px;
-}
-.actions .ig img {
-  display: block;            /* supprime l'espace inline autour de l'image */
-}
-
-/* Fallback responsive très étroit: réduire un peu la taille si nécessaire */
-@media (max-width: 360px) {
-  .actions .cta-group button { padding: 8px 14px; font-size: 16px; }
-  .actions .ig img { width: 24px; height: 24px; }
-}
-/* ====== Actions: tailles figées et uniformes ====== */
-:root {
-  --actions-btn-h: 48px;   /* hauteur de tous les boutons */
-  --actions-gap: 10px;     /* espacement fixe (en px) */
-  --ig-icon: 28px;         /* taille de l’icône Instagram */
-}
-
-/* Le conteneur d'actions: gap fixe en px pour éviter les variations liées au rem */
-.actions {
-  gap: var(--actions-gap);
-}
-
-/* Le groupe "IG — En savoir plus — IG" ne se replie pas et ne rétrécit pas */
-.actions .cta-group {
-  display: inline-flex;
-  flex-wrap: nowrap;
-  white-space: nowrap;
-  gap: var(--actions-gap);
-  flex: 0 0 auto;           /* pas d’élasticité */
-}
-
-/* Tous les boutons de .actions: même hauteur, pas d’élasticité */
-.actions > button,
-.actions .cta-group > button {
-  height: var(--actions-btn-h);
-  line-height: 1;           /* évite que la line-height gonfle la hauteur */
-  padding: 0 20px;          /* hauteur contrôlée par height, pas par padding */
-  flex: 0 0 auto;           /* ni grow ni shrink */
-}
-
-/* Boutons Instagram carrés et centrés */
+/* Boutons Instagram carrés */
 .actions .cta-group .ig {
   width: var(--actions-btn-h);
-  padding: 0;               /* carré exact */
+  padding: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -461,28 +446,57 @@ html, body {
   display: block;
 }
 
-/* Option: largeur fixe pour le bouton central "En savoir plus"
-   (retire cette règle si tu préfères une largeur auto mais elle ne rétrécira pas) */
-.actions .cta-group > button:not(.ig) {
-  width: 180px;             /* fixe (ne varie pas avec le viewport) */
-  text-align: center;
-}
+/* Mode étroit: 
+   Ligne 1 = En savoir plus (pleine largeur)
+   Ligne 2 = [gouttière][IG][IG][gouttière] -> centré */
+   @media (max-width: 420px) {
+    .actions .cta-group {
+      display: grid;
+      /* 4 colonnes: 1fr (gauche) + contenu + contenu + 1fr (droite) */
+      grid-template-columns: 1fr max-content max-content 1fr;
+      grid-template-areas:
+        "more more more more"
+        ".    ig1  ig2  .";
+      width: auto;
+      margin: 0 auto;
+      row-gap: var(--actions-gap, 10px);
+      column-gap: var(--actions-gap, 10px);
+  
+      /* On neutralise d’éventuels héritages */
+      justify-content: stretch !important;
+      align-content: center;
+      justify-items: center;
+      align-items: center;
+    }
+  
+    /* Ligne 1: bouton central pleine largeur */
+    .actions .cta-group > button:not(.ig) {
+      grid-area: more;
+      justify-self: stretch;
+      width: 100%;
+      max-width: max-content
+    }
+  
+    /* Ligne 2: les deux IG, dans les colonnes centrales */
+    .actions .cta-group .ig:first-of-type { grid-area: ig1; }
+    .actions .cta-group .ig:last-of-type  { grid-area: ig2; }
 
-/* Désactiver le fallback responsive qui changeait tailles et padding */
-@media (max-width: 360px) {
-  .actions .cta-group button { 
-    padding: 0 20px;        /* on remet la même valeur qu’en desktop */
-    font-size: 20px;        /* idem: pas de réduction typographique */
-  }
-  .actions .ig img { 
-    width: var(--ig-icon); 
-    height: var(--ig-icon); 
-  }
-}
+    .actions .cta-group > button:not(.ig) {
+      justify-self: center !important;
+      width: auto !important;
+      max-width: max-content;
+    }
+  
 
-/* (Option) Uniformiser aussi Prev/Suiv avec les mêmes tailles */
-.actions > .prev,
-.actions > .next {
-  height: var(--actions-btn-h);
-  padding: 0 20px;
+  }  /* “En savoir plus” sur toute la ligne du haut */
+  .actions .cta-group > button:not(.ig) {
+    grid-area: more;
+    justify-self: stretch;    /* pleine largeur du conteneur */
+    width: 100%;
+    max-width: max-content
+  }
+
+  /* Les deux IG, sur la ligne du dessous */
+  .actions .cta-group .ig:first-of-type { grid-area: ig1; }
+  .actions .cta-group .ig:last-of-type  { grid-area: ig2; }
 }
