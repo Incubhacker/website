@@ -159,3 +159,14 @@ images.forEach(image => {
     });
   });
 });
+// Pare-feu: bloquer toute action "zoom" sur les logos partenaires
+// (capture=true pour empêcher même d'anciens écouteurs déjà posés sur l'image)
+document.addEventListener('click', (e) => {
+  const bad = e.target && e.target.closest('.partners-logo img, img.partner-logo');
+  if (bad) {
+    e.preventDefault();
+    e.stopImmediatePropagation(); // stoppe tous les autres handlers (même sur l'image)
+    // Optionnel: feedback visuel neutre (curseur par ex.)
+    // bad.style.cursor = 'default';
+  }
+}, true); // <-- capture
