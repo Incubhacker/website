@@ -33,9 +33,9 @@
     <ul>
       <li><a href="#fifth">Notre Adresse</a></li>
     </ul>
-    <li><a href="#sixth">Nos Partenaires</a></li>
+    <li><a href="#sixth">Nous contacter</a></li>
     <ul>
-      <li><a href="#seventh">Seventh section</a></li>
+      <li><a href="#seventh">Nos Partenaires</a></li>
     </ul>
 </ul>
         
@@ -47,7 +47,7 @@
         <article class="main-article">
                     
           <header class="article-header">
-            <h1>Incubhacker,<br>le Hackerspace de Namur</h1>
+            <h1>Incubhacker<br>le Hackerspace de Namur</h1>
             <p class="subtitle">Atelier collaboratif “do it yourself”</p>
           </header>
           <header class="article-header">
@@ -222,13 +222,81 @@
               <img src="./assets/ezgif.com-apng-to-gif.gif" data-fullsrc="./assets/ezgif.com-apng-to-gif.gif">
             </div>
             <div class="contact-info">
-              <p><strong>Adresse :</strong> <span class="non-strong">Rue de l'Innovation, 42 - 5000 Namur</span></p>
+              <p><strong>Adresse :</strong> <span class="non-strong">Rue du Collège, 49 - 5000 Namur</span></p>
               <p><strong>Email :</strong> <span class="non-strong">incubhacker@gmail.com</span></p>
               <p><strong>Horaires :</strong> <span class="non-strong">Jeudi dès 18h30, samedi dès 13h30, fermeture tardive ! (23h+)</span></p>
             </div>
-          </section>
+</section>
+
+
+
+
+
+
+<section id="sixth" class="partners-section">
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <style>
+
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .required {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="contact-form">
+        <h2>Contactez-nous</h2>
+        
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            
+            <label for="email">Votre email <span class="required">*</span></label>
+            <input type="email" name="email" id="email" required 
+                   placeholder="votre@email.com">
+            
+            <label for="subject">Objet (facultatif)</label>
+            <input type="text" name="subject" id="subject" 
+                   placeholder="De quoi souhaitez-vous parler ?">
+            
+            <label for="message">Message <span class="required">*</span></label>
+            <textarea name="message" id="message" required 
+                      placeholder="Écrivez votre message ici..."></textarea>
+            
+            <button type="submit">Envoyer</button>
+            
+        </form>
+    </div>
+</body>
+</section>
           
-          <section id="sixth" class="partners-section">
+          <section id="seventh">
             <h2>Nos Partenaires</h2>
             <p>Incubhacker collabore avec des entreprises locales, institutions et organisations qui partagent notre vision de l'innovation collaborative. Ensemble, nous créons un écosystème dynamique pour soutenir les makers et entrepreneurs de la région.</p>
             <div class="partners-logo">
@@ -258,20 +326,17 @@
         
         </article>
       </div>
-
-      <!-- BOUTON RETOUR -->
-    <section id="seventh">
+    </section>
+    
+    <!-- BOUTON RETOUR -->
     <div class="actions">
       <button onclick="window.location.href='index.html'">← Retour à la galerie</button>
     </div>
-    </section>
-    
+
     <!-- FOOTER -->
     <div class="flexbox-footer">
       <div></div>
-    </div>
-
-
+    </div>  
 
 <script src="script2.js"></script>
 </body>
