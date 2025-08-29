@@ -499,4 +499,60 @@ html, body {
   /* Les deux IG, sur la ligne du dessous */
   .actions .cta-group .ig:first-of-type { grid-area: ig1; }
   .actions .cta-group .ig:last-of-type  { grid-area: ig2; }
+
+
+
+/* pour la lisibilité du text en footer sur le background */
+.infofooter {
+  text-align: center; 
+  font-size: 1.5em; 
+  margin-top: -0.5em; 
+  color: white;
+  text-shadow: 
+    /* Ligne du haut */
+    -5px -5px 0 #000, -4px -5px 0 #000, -3px -5px 0 #000, -2px -5px 0 #000, -1px -5px 0 #000,
+     0px -5px 0 #000,  1px -5px 0 #000,  2px -5px 0 #000,  3px -5px 0 #000,  4px -5px 0 #000,  5px -5px 0 #000,
+    
+    /* Ligne -4 */
+    -5px -4px 0 #000, -4px -4px 0 #000, -3px -4px 0 #000, -2px -4px 0 #000, -1px -4px 0 #000,
+     0px -4px 0 #000,  1px -4px 0 #000,  2px -4px 0 #000,  3px -4px 0 #000,  4px -4px 0 #000,  5px -4px 0 #000,
+    
+    /* Ligne -3 */
+    -5px -3px 0 #000, -4px -3px 0 #000, -3px -3px 0 #000, -2px -3px 0 #000, -1px -3px 0 #000,
+     0px -3px 0 #000,  1px -3px 0 #000,  2px -3px 0 #000,  3px -3px 0 #000,  4px -3px 0 #000,  5px -3px 0 #000,
+    
+    /* Ligne -2 */
+    -5px -2px 0 #000, -4px -2px 0 #000, -3px -2px 0 #000, -2px -2px 0 #000, -1px -2px 0 #000,
+     0px -2px 0 #000,  1px -2px 0 #000,  2px -2px 0 #000,  3px -2px 0 #000,  4px -2px 0 #000,  5px -2px 0 #000,
+    
+    /* Ligne -1 */
+    -5px -1px 0 #000, -4px -1px 0 #000, -3px -1px 0 #000, -2px -1px 0 #000, -1px -1px 0 #000,
+     0px -1px 0 #000,  1px -1px 0 #000,  2px -1px 0 #000,  3px -1px 0 #000,  4px -1px 0 #000,  5px -1px 0 #000,
+    
+    /* Ligne 0 (côtés seulement) */
+    -5px  0px 0 #000, -4px  0px 0 #000, -3px  0px 0 #000, -2px  0px 0 #000, -1px  0px 0 #000,
+     1px  0px 0 #000,  2px  0px 0 #000,  3px  0px 0 #000,  4px  0px 0 #000,  5px  0px 0 #000,
+    
+    /* Ligne +1 */
+    -5px  1px 0 #000, -4px  1px 0 #000, -3px  1px 0 #000, -2px  1px 0 #000, -1px  1px 0 #000,
+     0px  1px 0 #000,  1px  1px 0 #000,  2px  1px 0 #000,  3px  1px 0 #000,  4px  1px 0 #000,  5px  1px 0 #000,
+    
+    /* Ligne +2 */
+    -5px  2px 0 #000, -4px  2px 0 #000, -3px  2px 0 #000, -2px  2px 0 #000, -1px  2px 0 #000,
+     0px  2px 0 #000,  1px  2px 0 #000,  2px  2px 0 #000,  3px  2px 0 #000,  4px  2px 0 #000,  5px  2px 0 #000,
+    
+    /* Ligne +3 */
+    -5px  3px 0 #000, -4px  3px 0 #000, -3px  3px 0 #000, -2px  3px 0 #000, -1px  3px 0 #000,
+     0px  3px 0 #000,  1px  3px 0 #000,  2px  3px 0 #000,  3px  3px 0 #000,  4px  3px 0 #000,  5px  3px 0 #000,
+    
+    /* Ligne +4 */
+    -5px  4px 0 #000, -4px  4px 0 #000, -3px  4px 0 #000, -2px  4px 0 #000, -1px  4px 0 #000,
+     0px  4px 0 #000,  1px  4px 0 #000,  2px  4px 0 #000,  3px  4px 0 #000,  4px  4px 0 #000,  5px  4px 0 #000,
+    
+    /* Ligne du bas */
+    -5px  5px 0 #000, -4px  5px 0 #000, -3px  5px 0 #000, -2px  5px 0 #000, -1px  5px 0 #000,
+     0px  5px 0 #000,  1px  5px 0 #000,  2px  5px 0 #000,  3px  5px 0 #000,  4px  5px 0 #000,  5px  5px 0 #000;
+  
 }
+
+
