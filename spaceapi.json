@@ -18,7 +18,7 @@
     "linked_spaces": [
         {
             "website": "https://lghs.be",
-            "endpoint": "https://lghs.be/sapi/"
+            "endpoint": "https://spaceapi.lghs.be/"
         }
     ]
 }
